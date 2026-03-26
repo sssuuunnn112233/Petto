@@ -1,0 +1,137 @@
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.loading-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.gif-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 透明毛玻璃容器 */
+.loading-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60rpx 60rpx;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 40rpx;
+  backdrop-filter: blur(20rpx);
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 16rpx 64rpx rgba(0, 0, 0, 0.2);
+  min-width: 600rpx;
+  max-width: 80%;
+}
+
+.loading-text {
+  display: block;
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #4A7C59;
+  margin-bottom: 40rpx;
+  letter-spacing: 8rpx;
+  font-family: 'Courier New', monospace;
+  text-shadow: 2rpx 2rpx 4rpx rgba(0, 0, 0, 0.3);
+}
+
+/* 进度条容器 */
+.progress-container {
+  margin-bottom: 30rpx;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 40rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50rpx;
+  overflow: hidden;
+  border: 3rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 4rpx 8rpx rgba(0, 0, 0, 0.2);
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50 0%, #66BB6A 50%, #4CAF50 100%);
+  border-radius: 50rpx;
+  transition: width 0.1s linear;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20rpx rgba(76, 175, 80, 0.5);
+}
+
+/* 水平移动的光效 */
+.progress-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.6) 70%,
+    transparent 100%
+  );
+  animation: moveShine 1.5s infinite;
+}
+
+@keyframes moveShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.progress-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #4CAF50;
+  text-shadow: 1rpx 1rpx 2rpx rgba(0, 0, 0, 0.3);
+  display: block;
+}
+
+/* 响应式设计 */
+@media (max-width: 400px) {
+  .loading-content {
+    min-width: 560rpx;
+    padding: 50rpx 40rpx;
+  }
+  
+  .loading-text {
+    font-size: 56rpx;
+  }
+  
+  .progress-bar {
+    height: 36rpx;
+  }
+}

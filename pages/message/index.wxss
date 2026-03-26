@@ -1,0 +1,412 @@
+/**message/index.wxss**/
+page {
+  height: 100vh;
+  background-color: #FFF8DC;
+}
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF8DC;
+}
+
+/* 顶部导航栏 */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: calc(env(safe-area-inset-top) + 120rpx);
+  background-color: #FFF8DC;
+  padding: 0 32rpx 20rpx 32rpx;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 2rpx solid #FFE4B5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.header-title {
+  position: absolute;
+  left: 50%;
+  bottom: 20rpx;
+  transform: translateX(-50%);
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-btn, .add-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #f5f5f5;
+}
+
+.search-btn .icon, .add-btn .icon {
+  font-size: 16px;
+  color: #333;
+}
+
+/* 快捷入口 */
+.quick-access {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 16px;
+  background-color: #FFF8DC;
+}
+
+.access-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.access-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.access-img {
+  width: 48px;
+  height: 48px;
+}
+
+.access-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 消息列表 */
+.message-scroll {
+  flex: 1;
+  background-color: #FFF8DC;
+  height: 0;
+  min-height: 0;
+  padding-top: calc(env(safe-area-inset-top) + 140rpx);
+}
+
+/* 系统消息 */
+.system-message-section {
+  padding: 16px;
+  background-color: #FFF8DC;
+  margin-bottom: 0;
+}
+
+.system-message-section:not(:last-child) {
+  padding-bottom: 0;
+}
+
+.system-message-section:last-of-type {
+  margin-bottom: 100rpx;
+}
+
+.system-header {
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.system-title {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.system-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.system-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+  border-left: 3px solid #D2B48C;
+  position: relative;
+}
+
+.system-item.unread {
+  background: #fff;
+  border-left-color: #CD853F;
+}
+
+.system-item:active {
+  background: #f5f5f5;
+}
+
+.system-icon {
+  font-size: 32px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F5DC;
+  border-radius: 20px;
+}
+
+.system-item.unread .system-icon {
+  background: #FAEBD7;
+}
+
+.system-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.system-title-text {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.system-item.unread .system-title-text {
+  font-weight: 600;
+  color: #000;
+}
+
+.system-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.system-action {
+  font-size: 12px;
+  color: #D2B48C;
+  font-weight: 500;
+}
+
+.system-item.unread .system-action {
+  color: #CD853F;
+}
+
+.system-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.system-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.system-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #CD853F;
+}
+
+.message-list {
+  padding: 0 16px;
+}
+
+.message-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 8px;
+  background: #fff;
+  border-radius: 12px;
+  position: relative;
+}
+
+.message-item:active {
+  background: #f5f5f5;
+}
+
+.message-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.message-content {
+  flex: 1;
+  margin-left: 12px;
+  overflow: hidden;
+}
+
+.message-title {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.message-item.unread .message-title {
+  font-weight: 600;
+  color: #000;
+}
+
+.message-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(205, 133, 63, 0.2);
+  color: #CD853F;
+  font-size: 11px;
+  border-radius: 4px;
+  font-weight: normal;
+}
+
+.message-desc {
+  font-size: 13px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.message-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.message-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #ff2442;
+}
+
+/* 推荐关注 */
+.recommend-section {
+  padding: 32rpx;
+  margin-top: 16rpx;
+  margin-bottom: 100rpx;
+  background-color: #FFF8DC;
+}
+
+.recommend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.recommend-title {
+  font-size: 13px;
+  color: #666;
+}
+
+.recommend-close {
+  font-size: 18px;
+  color: #999;
+  padding: 4px;
+}
+
+.recommend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recommend-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.recommend-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.recommend-info {
+  flex: 1;
+  margin-left: 12px;
+  overflow: hidden;
+}
+
+.recommend-name {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recommend-desc {
+  font-size: 12px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recommend-btn {
+  padding: 6px 20px;
+  border: 1px solid #ff2442;
+  border-radius: 16px;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.recommend-btn .btn-text {
+  font-size: 13px;
+  color: #ff2442;
+}
+
+.recommend-btn:active {
+  background: rgba(255, 36, 66, 0.1);
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-size: 13px;
+}

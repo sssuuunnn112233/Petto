@@ -1,0 +1,390 @@
+page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.flip-game-page {
+  width: 100%;
+  height: 100vh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 背景图片 */
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* 游戏信息栏 */
+.game-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15rpx;
+  padding: 0 15rpx;
+  flex-shrink: 0;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10rpx);
+  padding: 15rpx 20rpx;
+  border-radius: 15rpx;
+  min-width: 100rpx;
+  border: 2rpx solid rgba(74, 144, 226, 0.3);
+}
+
+.info-item.level-selector {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.info-item.level-selector:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.level-value-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  width: 100%;
+}
+
+.level-arrow {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #2E5C8A;
+  line-height: 1;
+  padding: 0 8rpx;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.level-arrow:active {
+  transform: scale(1.2);
+  color: #1A4A6B;
+}
+
+.level-value {
+  min-width: 40rpx;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 24rpx;
+  color: #2E5C8A;
+  margin-bottom: 8rpx;
+}
+
+.info-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1A4A6B;
+}
+
+/* 游戏棋盘 */
+.game-board {
+  flex: 1;
+  width: 100%;
+  max-width: 680rpx;
+  display: grid;
+  gap: 8rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+  justify-content: center;
+  align-content: start;
+  overflow-y: auto;
+  max-height: calc(100vh - 480rpx);
+  margin-bottom: 0rpx;
+}
+
+/* 卡片 */
+.card {
+  aspect-ratio: 1;
+  perspective: 1000rpx;
+  cursor: pointer;
+  min-width: 0;
+  min-height: 0;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card.matched .card-inner {
+  opacity: 0.4;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+.card-front {
+  background: #e7d5b4; /* 米色背景 */
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  background: #fff;
+  transform: rotateY(180deg);
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.card-back-image {
+  width: 80%;
+  height: 80%;
+  border-radius: 8rpx;
+  opacity: 0.8;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+
+/* 控制按钮 */
+.control-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 0rpx;
+  margin-bottom: 20rpx;
+  width: 100%;
+  max-width: 700rpx;
+  padding: 0 20rpx;
+  flex-shrink: 0;
+}
+
+.control-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2E5C8A;
+  border: 2rpx solid rgba(74, 144, 226, 0.3);
+  border-radius: 50rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(46, 92, 138, 0.2);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* 通关面板 */
+.win-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.win-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8rpx);
+}
+
+.win-content {
+  position: relative;
+  width: 600rpx;
+  background: #fff;
+  border-radius: 30rpx;
+  padding: 50rpx 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 1101;
+}
+
+.win-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.win-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.win-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120rpx;
+}
+
+.stat-label {
+  font-size: 26rpx;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #2E5C8A;
+}
+
+.win-buttons {
+  display: flex;
+  gap: 20rpx;
+  justify-content: center;
+}
+
+.win-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #4A90E2 0%, #2E5C8A 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.win-btn.secondary {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.win-btn[disabled] {
+  background: #ccc;
+  color: #fff;
+}
+
+.win-btn:active {
+  transform: scale(0.97);
+}
+
+/* 关卡选择弹窗 */
+.level-select-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5rpx);
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 30rpx;
+  padding: 50rpx 40rpx;
+  width: 600rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.modal-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.level-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.level-btn {
+  background: #f5f5f5;
+  color: #333;
+  border: 3rpx solid transparent;
+  border-radius: 20rpx;
+  padding: 25rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.level-btn.active {
+  background: linear-gradient(135deg, #4A90E2 0%, #2E5C8A 100%);
+  color: #fff;
+  border-color: #4A90E2;
+}
+
+.level-btn:active {
+  transform: scale(0.98);
+}
+
+.close-btn {
+  width: 100%;
+  background: #f5f5f5;
+  color: #666;
+  border: none;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+
+.close-btn:active {
+  background: #e0e0e0;
+}

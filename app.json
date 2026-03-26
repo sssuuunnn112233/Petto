@@ -1,0 +1,92 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/pet/index",
+    "pages/game/index",
+    "pages/loading/index",
+    "pages/post-detail/post-detail",
+    "pages/community/index",
+    "pages/create-post/create-post",
+    "pages/wardrobe/index",
+    "pages/customize/index",
+    "pages/message/index",
+    "pages/message/like/like",
+    "pages/message/follow/follow",
+    "pages/message/comment/comment",
+    "pages/message/chat/chat",
+    "pages/message/group-chat/group-chat",
+    "pages/message/group-setting/group-setting",
+    "pages/profile/index",
+    "pages/edit-profile/index",
+    "pages/feedback/feedback",
+    "pages/my-posts/my-posts",
+    "pages/game-records/game-records",
+    "pages/points-store/points-store",
+    "pages/match3-game/index",
+    "pages/flipcardgame/index"
+  ],
+
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "permission": {
+    "scope.record": {
+      "desc": "需要录音权限来实现语音对话功能"
+    }
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#07c160",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/game/index",
+        "text": "游戏",
+        "iconPath": "assets/tabbar/game.png",
+        "selectedIconPath": "assets/tabbar/game-active.png"
+      },
+      {
+        "pagePath": "pages/community/index",
+        "text": "社区",
+        "iconPath": "assets/tabbar/community.png",
+        "selectedIconPath": "assets/tabbar/community-active.png"
+      },
+      {
+        "pagePath": "pages/pet/index",
+        "text": "宠物",
+        "iconPath": "assets/tabbar/pet.png",
+        "selectedIconPath": "assets/tabbar/pet-active.png"
+      },
+      {
+        "pagePath": "pages/message/index",
+        "text": "消息",
+        "iconPath": "assets/tabbar/message.png",
+        "selectedIconPath": "assets/tabbar/message-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/tabbar/profile.png",
+        "selectedIconPath": "assets/tabbar/profile-active.png"
+      }
+    ]
+  },
+  "renderer": "skyline",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "tagNameStyleIsolation": "legacy",
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "cloud": true
+}

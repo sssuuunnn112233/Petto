@@ -1,0 +1,305 @@
+<page-meta>
+  <navigation-bar title="铲屎官" back="{{false}}" color="black" background="#FFF8DC"></navigation-bar>
+</page-meta>
+
+<scroll-view class="scrollarea" scroll-y>
+  <!-- 装饰性宠物图标 -->
+  <view class="decorative-pets">
+    <image class="pet-decoration pet-top-left" src="/assets/icon/橘猫.png" mode="aspectFill" style="position: absolute; left: 254rpx; top: -58rpx"></image>
+    <image class="pet-decoration pet-top-right" src="/assets/icon/柯基.png" mode="aspectFill" style="position: absolute; left: 225rpx; top: 739rpx"></image>
+  </view>
+  
+  <view class="profile">
+    <!-- 用户信息区域 -->
+    <view class="user-section">
+      <view class="user-info">
+        <view class="avatar">
+          <image src="{{userInfo.avatar}}" mode="aspectFill"></image>
+          <!-- 头像装饰 -->
+          <image class="avatar-decoration" src="/assets/icon/白猫.png" mode="aspectFill"></image>
+        </view>
+        <view class="user-details">
+          <view class="username">
+            <text class="name">{{userInfo.name}}</text>
+            <text class="gender-icon">{{userInfo.gender}}</text>
+            <!-- 云端状态指示器 -->
+            <view class="cloud-status {{useCloudData && !cloudError ? 'online' : 'offline'}}">
+              <view class="status-dot"></view>
+              <text class="status-text">{{useCloudData && !cloudError ? '云端' : '本地'}}</text>
+            </view>
+            <text class="arrow-icon" bindtap="onEditProfile">›</text>
+          </view>
+          <view class="stats-row">
+            <view class="stat-item">
+              <text class="stat-number">{{userInfo.stats.dynamic}}</text>
+              <text class="stat-label">动态</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-number">{{userInfo.stats.followers}}</text>
+              <text class="stat-label">粉丝</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-number">{{userInfo.stats.following}}</text>
+              <text class="stat-label">关注</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-number">{{userInfo.stats.likes}}</text>
+              <text class="stat-label">获赞</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 状态栏 -->
+    <view class="status-bar">
+      <view class="status-content">
+        <image class="running-cat" src="/assets/icon/金毛.png"></image>
+        <text class="status-text">与{{userInfo.pets && userInfo.pets.length > 0 ? userInfo.pets[0].name : '宠物'}}在一起已经{{userInfo.daysTogether || 1}}天了</text>
+        <!-- 状态栏装饰 -->
+        
+      </view>
+    </view>
+
+    <!-- 每日签到区域 -->
+    <view class="checkin-section">
+      <view class="checkin-card">
+        <view class="checkin-header" style="width: -74rpx; display: flex; box-sizing: content-box">
+          <view class="checkin-title">
+            
+            <text class="checkin-text" style="position: relative; left: 22rpx; top: 0rpx">每日签到</text>
+          </view>
+          <text class="checkin-history" bindtap="onViewCheckInHistory">记录 ›</text>
+        </view>
+        
+        <view class="checkin-content">
+          <view class="checkin-info">
+            <view class="checkin-stat">
+              <text class="stat-number">{{checkInData.consecutiveDays}}</text>
+              <text class="stat-label">连续天数</text>
+            </view>
+            <view class="checkin-stat">
+              <text class="stat-number">{{checkInData.totalCheckIns}}</text>
+              <text class="stat-label">累计签到</text>
+            </view>
+            <view class="checkin-stat">
+              <text class="stat-number">{{checkInData.todayReward}}</text>
+              <text class="stat-label">今日奖励</text>
+            </view>
+          </view>
+          
+          <button 
+            class="checkin-btn {{checkInData.hasCheckedToday ? 'checked' : ''}}"
+            bindtap="onDailyCheckIn"
+            disabled="{{checkInData.hasCheckedToday}}"
+           style="width: 118rpx; height: 124rpx; display: block; box-sizing: border-box; left: -35rpx; top: -18rpx">
+            <text class="checkin-btn-text">
+              {{checkInData.hasCheckedToday ? '已签到' : '立即签到'}}
+            </text>
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 签到记录弹窗 -->
+    <view class="checkin-modal" wx:if="{{showCheckinModal}}" bindtap="onCloseCheckinModal">
+      <view class="checkin-modal-content" catchtap="stopPropagation">
+        <view class="checkin-modal-header">
+          <text class="checkin-modal-title">签到记录</text>
+          <text class="checkin-modal-close" bindtap="onCloseCheckinModal">×</text>
+        </view>
+        
+        <view class="checkin-stats">
+          <view class="checkin-stat-item">
+            <text class="stat-icon">📊</text>
+            <text class="stat-text">签到统计</text>
+          </view>
+          <view class="checkin-stat-row">
+            <view class="stat-detail">
+              <text class="stat-icon">🔥</text>
+              <text class="stat-label">连续签到: {{checkInData.consecutiveDays}} 天</text>
+            </view>
+            <view class="stat-detail">
+              <text class="stat-icon">📅</text>
+              <text class="stat-label">累计签到: {{checkInData.totalCheckIns}} 天</text>
+            </view>
+          </view>
+          <view class="checkin-stat-row">
+            <view class="stat-detail">
+              <text class="stat-icon">💰</text>
+              <text class="stat-label">今日奖励: {{checkInData.todayReward}} 积分</text>
+            </view>
+            <view class="stat-detail">
+              <text class="stat-icon">💡</text>
+              <text class="stat-label">连续签到奖励:</text>
+            </view>
+          </view>
+          <view class="reward-rules">
+            <text class="rule-text">• 连续3天: 额外10积分</text>
+            <text class="rule-text">• 连续7天: 额外20积分</text>
+          </view>
+        </view>
+
+        <!-- 猫爪日历 -->
+        <view class="checkin-calendar">
+          <view class="calendar-header">
+            <text class="calendar-title">🐾 本月签到记录</text>
+          </view>
+          <view class="calendar-grid">
+            <view class="calendar-weekdays">
+              <text class="weekday">日</text>
+              <text class="weekday">一</text>
+              <text class="weekday">二</text>
+              <text class="weekday">三</text>
+              <text class="weekday">四</text>
+              <text class="weekday">五</text>
+              <text class="weekday">六</text>
+            </view>
+            <view class="calendar-days">
+              <view 
+                class="calendar-day {{item.isToday ? 'today' : ''}} {{item.isChecked ? 'checked' : ''}}" 
+                wx:for="{{calendarDays}}" 
+                wx:key="day"
+              >
+                <text class="day-number">{{item.day}}</text>
+                <text class="paw-icon" wx:if="{{item.isChecked}}">🐾</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="checkin-modal-footer">
+          <button class="modal-confirm-btn" bindtap="onCloseCheckinModal">确定</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 我的宠物区域 -->
+    <view class="pets-section">
+      <view class="section-title">我的宠物</view>
+      <view class="pets-list">
+        <!-- 展示用户的宠物 -->
+        <view class="pet-item" wx:for="{{pets}}" wx:key="id" bindtap="onPetTap" data-pet="{{item}}">
+          <view class="pet-avatar">
+            <image src="/assets/icon/橘猫.png" mode="aspectFill"></image>
+          </view>
+          <view class="pet-info">
+            <view class="pet-name">
+              <text>{{item.name}}</text>
+              <text class="pet-gender">{{item.gender || '♂'}}</text>
+            </view>
+            <view class="pet-details">{{item.age || '未知年龄'}} · {{item.weight || '未知体重'}}</view>
+          </view>
+        </view>
+        <!-- 如果没有宠物，显示默认宠物 -->
+        <view class="pet-item" wx:if="{{pets.length === 0 && userInfo.pets && userInfo.pets.length > 0}}" bindtap="onPetTap" data-pet="{{userInfo.pets[0]}}">
+          <view class="pet-avatar">
+            <image src="/assets/icon/橘猫.png" mode="aspectFill"></image>
+          </view>
+          <view class="pet-info">
+            <view class="pet-name">
+              <text>{{userInfo.pets[0].name}}</text>
+              <text class="pet-gender">{{userInfo.pets[0].gender}}</text>
+            </view>
+            <view class="pet-details">{{userInfo.pets[0].age}} · {{userInfo.pets[0].weight}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 我的动态区域 -->
+    <view class="posts-section">
+      <view class="section-header">
+        <view class="section-title">
+          <text>我的动态</text>
+          <text class="post-count">({{userPosts.length}})</text>
+        </view>
+        <text class="view-all-btn" bindtap="onViewMyPosts">查看全部 ›</text>
+      </view>
+      
+      <!-- 简化显示：只显示统计信息 -->
+      <view class="posts-summary">
+        <view class="summary-item">
+          <text class="summary-number">{{userPosts.length}}</text>
+          <text class="summary-label">动态</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-number">{{userStats.likes || 0}}</text>
+          <text class="summary-label">获赞</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-number">{{totalFavorites || 0}}</text>
+          <text class="summary-label">收藏</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 游戏记录区域 -->
+    <view class="game-records-section">
+      <view class="section-header">
+        <view class="section-title">
+          <text>游戏记录</text>
+          <image class="game-icon-img" src="/assets/icon/哈士奇.png" mode="aspectFill" style="width: 49rpx; height: 45rpx; display: block; box-sizing: border-box"></image>
+        </view>
+        <text class="view-all-btn" bindtap="onViewGameRecords">查看全部 ›</text>
+      </view>
+      
+      <view class="game-stats-preview">
+        <view class="stat-item">
+          
+          <text class="stat-number">{{gameStats.totalGames}}</text>
+          <text class="stat-label">总游戏</text>
+        </view>
+        <view class="stat-item">
+          
+          <text class="stat-number">{{gameStats.totalScore}}</text>
+          <text class="stat-label">总得分</text>
+        </view>
+        <view class="stat-item">
+          
+          <text class="stat-number">{{gameStats.bestScore}}</text>
+          <text class="stat-label">最高分</text>
+        </view>
+        <view class="stat-item">
+          
+          <text class="stat-number">{{gameStats.totalPoints}}</text>
+          <text class="stat-label">总积分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-section" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 功能区域 -->
+    <view class="functions-section">
+      <view class="function-item" bindtap="onSettings">
+        <image class="function-icon" src="/assets/icon/暹罗猫.png"></image>
+        <text class="function-text">设置</text>
+        <text class="arrow-icon">›</text>
+      </view>
+      <view class="function-item" bindtap="onPrivacy">
+        <image class="function-icon" src="/assets/icon/奶牛猫.png"></image>
+        <text class="function-text">隐私中心</text>
+        <text class="arrow-icon">›</text>
+      </view>
+      <view class="function-item" bindtap="onFeedback">
+        <image class="function-icon" src="/assets/icon/黑猫.png"></image>
+        <text class="function-text">问题反馈</text>
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+    
+    <!-- 底部装饰宠物 -->
+    <view class="bottom-decoration" style="position: relative; left: -1rpx; top: 31rpx">
+      
+      <view class="pet-trail">
+        
+        
+        
+      </view>
+    </view>
+  </view>
+</scroll-view>

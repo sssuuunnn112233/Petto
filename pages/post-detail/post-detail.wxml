@@ -1,0 +1,261 @@
+<!--post-detail/post-detail.wxml-->
+<view class="page">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="back-btn" catchtap="onBack">
+      <text class="icon">‹</text>
+    </view>
+    <view class="user-info" bindtap="onViewUser">
+      <image class="user-avatar" src="{{post.author.avatar}}" mode="aspectFill" />
+      <text class="user-name">{{post.author.name}}</text>
+    </view>
+    <view class="follow-btn" bindtap="onFollow">
+      <text class="btn-text">{{isFollowed ? '已关注' : '关注'}}</text>
+    </view>
+    <view class="share-btn" bindtap="onShare">
+      <text class="icon">↗</text>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view
+    class="content-scroll"
+    scroll-y="{{true}}"
+    enable-back-to-top="{{true}}"
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+  >
+    <!-- 图片/视频轮播 -->
+    <swiper 
+      class="image-swiper" 
+      indicator-dots="{{post.type === 'image' && post.images && post.images.length > 1}}"
+      indicator-color="rgba(255,255,255,0.5)"
+      indicator-active-color="#fff"
+      autoplay="{{false}}"
+      circular="{{true}}"
+    >
+      <!-- 视频类型 -->
+      <swiper-item wx:if="{{post.type === 'video' && post.video}}">
+        <view class="video-wrapper">
+          <video 
+            class="post-video" 
+            src="{{post.video}}" 
+            controls="{{true}}"
+            show-center-play-btn="{{true}}"
+            object-fit="contain"
+            poster="{{post.poster}}"
+            enable-play-gesture="{{true}}"
+            autoplay="{{false}}"
+            loop="{{false}}"
+            muted="{{false}}"
+            initial-time="0"
+            bindplay="onVideoPlay"
+            binderror="onVideoError"
+          ></video>
+        </view>
+      </swiper-item>
+      <!-- 图片类型 -->
+      <block wx:else>
+        <!-- 如果有图片数组，循环显示 -->
+        <block wx:if="{{post.images && post.images.length > 0}}">
+          <swiper-item wx:for="{{post.images}}" wx:key="index" wx:for-item="img">
+            <image 
+              class="post-image" 
+              src="{{img}}" 
+              mode="aspectFill"
+              bindtap="onPreviewImage"
+              data-url="{{img}}"
+              lazy-load="{{true}}"
+              binderror="onImageError"
+            />
+          </swiper-item>
+        </block>
+        <!-- 如果没有图片数组但有image字段，显示单张图片 -->
+        <swiper-item wx:elif="{{post.image}}">
+          <image 
+            class="post-image" 
+            src="{{post.image}}" 
+            mode="aspectFill"
+            bindtap="onPreviewImage"
+            data-url="{{post.image}}"
+            lazy-load="{{true}}"
+            binderror="onImageError"
+          />
+        </swiper-item>
+        <!-- 如果完全没有图片，显示默认占位图 -->
+        <swiper-item wx:else>
+          <view class="post-placeholder">
+            <text class="placeholder-icon">📷</text>
+            <text class="placeholder-text">暂无内容</text>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!-- 帖子信息 -->
+    <view class="post-info">
+      <view class="post-title">{{post.title}}</view>
+      <view class="post-tags">
+        <text 
+          wx:for="{{post.tags}}" 
+          wx:key="index"
+          class="tag"
+        >#{{item}}</text>
+      </view>
+      <view class="post-meta">
+        <text class="post-time">{{post.time}}</text>
+        <text class="post-location">{{post.location}}</text>
+      </view>
+    </view>
+
+    <!-- 评论区 -->
+    <view class="comment-section">
+      <view class="comment-header">
+        <text class="comment-title">共 {{commentCount}} 条评论</text>
+        <text class="sort-icon">≡</text>
+      </view>
+
+      <!-- 评论输入框 -->
+      <view class="comment-input-box">
+        <image class="input-avatar" src="{{userAvatar}}" mode="aspectFill" />
+        <view class="input-wrapper">
+          <view class="reply-tag" wx:if="{{replyingTo}}">
+            <text>回复 {{replyingToUserName}}:</text>
+            <text class="cancel-reply" bindtap="onCancelReply">✕</text>
+          </view>
+          <input 
+            class="comment-input" 
+            placeholder="{{replyingTo ? '输入回复内容...' : '留下你的想法吧'}}"
+            value="{{commentText}}"
+            bindinput="onCommentInput"
+            bindconfirm="onSubmitComment"
+            bindblur="onBlurInput"
+            focus="{{showCommentInput}}"
+          />
+        </view>
+        <view class="input-actions">
+          <text class="action-icon">@</text>
+          <text class="action-icon">😊</text>
+          <text class="action-icon">🖼️</text>
+        </view>
+      </view>
+
+      <!-- 评论列表 -->
+      <view class="comment-list">
+        <view 
+          wx:for="{{comments}}" 
+          wx:key="id"
+          class="comment-item"
+        >
+          <image class="comment-avatar" src="{{item.avatar}}" mode="aspectFill" />
+          <view class="comment-content">
+            <view class="comment-user">
+              {{item.userName}}
+              <text class="comment-tag" wx:if="{{item.tag}}">、</text>
+            </view>
+            <view class="comment-text">{{item.content}}</view>
+            <view class="comment-meta">
+              <text class="comment-time">{{item.time}}</text>
+              <text class="comment-location">{{item.location}}</text>
+              <text class="comment-reply" bindtap="onReply" data-id="{{item.id}}" data-user-name="{{item.userName}}">回复</text>
+            </view>
+
+            <!-- 子评论 -->
+            <view class="sub-comments" wx:if="{{item.replies && item.replies.length > 0}}">
+              <!-- 显示部分回复（未展开时只显示前几条） -->
+              <block wx:if="{{!expandedComments[item.id]}}">
+                <view 
+                  wx:for="{{item.replies}}" 
+                  wx:key="index"
+                  wx:for-item="reply"
+                  wx:for-index="replyIndex"
+                  class="sub-comment-item"
+                  wx:if="{{replyIndex < 3}}"
+                >
+                  <image class="sub-avatar" src="{{reply.avatar}}" mode="aspectFill" />
+                  <view class="sub-content">
+                    <text class="sub-user">{{reply.userName}}</text>
+                    <text class="sub-text">{{reply.content}}</text>
+                  </view>
+                  <view class="sub-time">{{reply.time}}</view>
+                  <text class="sub-emoji" bindtap="onReplySubComment" data-comment-id="{{item.id}}" data-user-name="{{reply.userName}}">回复</text>
+                </view>
+              </block>
+              
+              <!-- 显示所有回复（展开时） -->
+              <block wx:else>
+                <view 
+                  wx:for="{{item.replies}}" 
+                  wx:key="index"
+                  wx:for-item="reply"
+                  class="sub-comment-item"
+                >
+                  <image class="sub-avatar" src="{{reply.avatar}}" mode="aspectFill" />
+                  <view class="sub-content">
+                    <text class="sub-user">{{reply.userName}}</text>
+                    <text class="sub-text">{{reply.content}}</text>
+                  </view>
+                  <view class="sub-time">{{reply.time}}</view>
+                  <text class="sub-emoji" bindtap="onReplySubComment" data-comment-id="{{item.id}}" data-user-name="{{reply.userName}}">回复</text>
+                </view>
+              </block>
+              
+              <!-- 展开/收起按钮 -->
+              <view class="expand-replies" wx:if="{{item.totalReplies > 3 || (expandedComments[item.id] && item.replies.length > 3)}}" bindtap="onExpandReplies" data-id="{{item.id}}">
+                <text wx:if="{{!expandedComments[item.id]}}">展开 {{item.totalReplies > item.replies.length ? item.totalReplies - 3 : item.replies.length - 3}} 条回复 ▼</text>
+                <text wx:else>收起回复 ▲</text>
+              </view>
+            </view>
+          </view>
+          <view class="comment-actions">
+            <view class="like-btn" bindtap="onLikeComment" data-id="{{item.id}}">
+              <text class="like-icon">{{item.liked ? '❤' : '🤍'}}</text>
+              <text class="like-count" wx:if="{{item.likeCount > 0}}">{{item.likeCount}}</text>
+            </view>
+            <text class="reply-emoji" bindtap="onReply" data-id="{{item.id}}">😊</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="input-area">
+      <view class="reply-tag-bottom" wx:if="{{replyingTo}}">
+        <text>回复 {{replyingToUserName}}</text>
+        <text class="cancel-reply" bindtap="onCancelReply">✕</text>
+      </view>
+      <input 
+        class="bottom-input" 
+        type="text"
+        placeholder="{{replyingTo ? '输入回复内容...' : '说点什么...'}}"
+        value="{{bottomCommentText}}"
+        bindinput="onBottomCommentInput"
+        bindconfirm="onSubmitBottomComment"
+        bindfocus="onFocusInput"
+        bindblur="onBlurInput"
+      />
+    </view>
+    <view class="action-btns">
+      <view class="action-item" bindtap="onToggleLike">
+        <text class="action-icon {{post.liked ? 'liked' : 'unliked'}}">{{post.liked ? '❤' : '🤍'}}</text>
+        <text class="action-count">{{post.likeCount}}</text>
+      </view>
+      <view class="action-item" bindtap="onToggleFavorite">
+        <text class="action-icon {{post.collected ? 'collected' : 'uncollected'}}">{{post.collected ? '⭐' : '☆'}}</text>
+        <text class="action-count">{{post.collectCount}}</text>
+      </view>
+      <view class="action-item" bindtap="onShowComments">
+        <text class="action-icon">💬</text>
+        <text class="action-count">{{commentCount}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+

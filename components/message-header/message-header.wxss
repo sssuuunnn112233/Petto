@@ -1,0 +1,52 @@
+/* 消息页面通用头部组件样式 */
+.message-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(env(safe-area-inset-top) + 120rpx);
+  background: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 20rpx 20rpx 20rpx;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 1rpx solid #e5e5e5;
+  z-index: 100;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:active {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.back-icon {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.back-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.header-placeholder {
+  width: 120rpx;
+}

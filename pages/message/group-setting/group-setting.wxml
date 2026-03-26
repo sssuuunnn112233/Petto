@@ -1,0 +1,168 @@
+<!--message/group-setting/group-setting.wxml-->
+<view class="page">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="back-btn" bindtap="onBack">
+      <text class="icon">‹</text>
+    </view>
+    <view class="header-title">聊天设置</view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view
+    class="content-scroll"
+    scroll-y="{{true}}"
+    enable-back-to-top="{{true}}"
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+  >
+    <!-- 群信息卡片 -->
+    <view class="group-card" bindtap="onEnterChat">
+      <image class="group-cover" src="{{groupInfo.avatar}}" mode="aspectFill" />
+      <view class="group-info">
+        <view class="group-name">{{groupInfo.name}}</view>
+        <view class="group-desc">{{groupInfo.desc}}</view>
+      </view>
+      <view class="enter-chat-btn">
+        <text class="enter-chat-text">进入聊天</text>
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 群成员 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">群成员({{groupInfo.memberCount}})</text>
+        <text class="section-action" bindtap="onViewAllMembers">全部 ›</text>
+      </view>
+      <view class="member-grid">
+        <view 
+          wx:for="{{members}}" 
+          wx:key="id"
+          class="member-item"
+          data-id="{{item.id}}"
+          bindtap="onViewMember"
+        >
+          <image class="member-avatar" src="{{item.avatar}}" mode="aspectFill" />
+          <text class="member-name">{{item.name}}</text>
+        </view>
+        <view class="member-item add-btn" bindtap="onAddMember">
+          <view class="add-icon">+</view>
+          <text class="member-name">邀请好友</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 分享群邀请 -->
+    <view class="action-section">
+      <view class="action-item" bindtap="onShare">
+        <text class="action-text">分享群邀请</text>
+        <view class="share-icons">
+          <text class="share-icon">📱</text>
+          <text class="share-icon">💬</text>
+          <text class="share-icon">🔗</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 生成评论区群链接 -->
+    <view class="action-section">
+      <view class="action-item" bindtap="onGenerateLink">
+        <text class="action-text">生成评论区群链接</text>
+        <text class="action-hint">可直接粘贴到笔记评论区</text>
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 设置列表 -->
+    <view class="setting-section">
+      <view class="setting-item" bindtap="onQRCode">
+        <view class="setting-left">
+          <text class="setting-text">群二维码</text>
+          <text class="setting-hint">可直接分享或保存到相册</text>
+        </view>
+        <view class="setting-right">
+          <text class="qr-icon">⊞</text>
+          <text class="arrow-icon">›</text>
+        </view>
+      </view>
+
+      <view class="setting-item" bindtap="onAnnouncement">
+        <view class="setting-left">
+          <text class="setting-text">群公告</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-value">{{announcement || '未设置'}}</text>
+          <text class="arrow-icon">›</text>
+        </view>
+      </view>
+
+      <view class="setting-item" bindtap="onNickname">
+        <view class="setting-left">
+          <text class="setting-text">我在本群的昵称</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-value">{{myNickname}}</text>
+          <text class="arrow-icon">›</text>
+        </view>
+      </view>
+
+      <view class="setting-item" bindtap="onRemark">
+        <view class="setting-left">
+          <text class="setting-text">群备注</text>
+        </view>
+        <view class="setting-right">
+          <text class="setting-value">{{groupRemark || '未设置'}}</text>
+          <text class="arrow-icon">›</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 其他设置 -->
+    <view class="setting-section">
+      <view class="setting-item" bindtap="onSearchHistory">
+        <text class="setting-text">查找聊天记录</text>
+        <text class="arrow-icon">›</text>
+      </view>
+
+      <view class="setting-item" bindtap="onNotDisturb">
+        <text class="setting-text">免打扰设置</text>
+        <text class="setting-value">不通知任何消息</text>
+        <text class="arrow-icon">›</text>
+      </view>
+
+      <view class="setting-item switch-item">
+        <text class="setting-text">置顶聊天</text>
+        <switch class="switch" checked="{{isTop}}" bindchange="onToggleTop" />
+      </view>
+    </view>
+
+    <!-- 管理操作 -->
+    <view class="setting-section">
+      <view class="setting-item" bindtap="onReport">
+        <text class="setting-text">举报</text>
+        <text class="arrow-icon">›</text>
+      </view>
+
+      <view class="setting-item" bindtap="onGroupContract">
+        <text class="setting-text">群聊公约</text>
+        <text class="arrow-icon">›</text>
+      </view>
+
+      <view class="setting-item" bindtap="onClearHistory">
+        <text class="setting-text">清空聊天记录</text>
+        <text class="arrow-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 退出群聊按钮 -->
+    <view class="quit-section">
+      <view class="quit-btn" bindtap="onQuit">
+        <text class="quit-text">删除并退出</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+
+

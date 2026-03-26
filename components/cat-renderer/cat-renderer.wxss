@@ -1,0 +1,129 @@
+/* 猫咪渲染组件样式 */
+
+.cat-renderer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent; /* 移除白色背景 */
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+/* 尺寸变体 */
+.cat-renderer-small {
+  width: 280rpx;
+  height: 280rpx;
+}
+
+.cat-renderer-normal {
+  width: 560rpx;
+  height: 560rpx;
+}
+
+.cat-renderer-pet {
+  width: 600rpx;
+  height: 600rpx;
+}
+
+.cat-renderer-large {
+  width: 800rpx;
+  height: 800rpx;
+}
+
+/* 图层容器 */
+.cat-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 图片样式 */
+.cat-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+/* 调试信息 */
+.debug-info {
+  position: absolute;
+  top: 10rpx;
+  left: 10rpx;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10rpx;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  z-index: 999;
+}
+
+.debug-info text {
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+/* 特定图层的样式调整 */
+.cat-layer-body {
+  z-index: 1;
+}
+
+.cat-layer-pattern {
+  z-index: 2;
+}
+
+.cat-layer-socks {
+  z-index: 3;
+}
+
+/* 袜子图层 - 使用SVG clipPath实现身体遮罩 */
+.cat-layer-socks {
+  z-index: 3;
+}
+
+/* customize页面的袜子特殊处理：只显示白色部分且与身体相交 */
+.customize-socks {
+  /* 使用遮罩模式，只显示白色部分 */
+  mask-mode: luminance;
+  -webkit-mask-mode: luminance;
+}
+
+.customize-socks .cat-image {
+  /* 通过CSS滤镜处理，突出白色部分 */
+  filter: contrast(200%) brightness(1.2);
+  /* 使用混合模式让白色部分更突出 */
+  mix-blend-mode: screen;
+}
+
+
+.customize-ear .cat-image {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 40%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+.cat-layer-accessories {
+  z-index: 4;
+}
+
+.cat-layer-ear {
+  z-index: 5;
+}
+
+.cat-layer-eye {
+  z-index: 6;
+}
+
+.cat-layer-nose {
+  z-index: 7;
+}
+
+.cat-layer-mouth {
+  z-index: 8;
+}

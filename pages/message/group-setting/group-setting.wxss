@@ -1,0 +1,331 @@
+/**message/group-setting/group-setting.wxss**/
+page {
+  height: 100vh;
+  background: #FFF8DC; /* 温馨米色背景 */
+}
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #FFF8DC; /* 温馨米色背景 */
+}
+
+/* 顶部导航栏 */
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.95); /* 半透明白色 */
+  padding: 0 16px;
+  padding-top: 44px;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.1); /* 淡棕色边框 */
+  backdrop-filter: blur(10px);
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-btn .icon {
+  font-size: 32px;
+  color: #8B4513; /* 棕色 */
+  font-weight: 300;
+}
+
+.header-title {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 600;
+  color: #8B4513; /* 棕色 */
+  text-align: center;
+  margin-right: 40px;
+}
+
+/* 内容区域 */
+.content-scroll {
+  flex: 1;
+  background: #FFF8DC; /* 温馨米色背景 */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 群信息卡片 */
+.group-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.8); /* 半透明白色 */
+  margin: 12px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.1); /* 淡棕色阴影 */
+  border: 1px solid rgba(139, 69, 19, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.group-card:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.enter-chat-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #D2691E, #CD853F);
+  border-radius: 20px;
+  margin-left: 8px;
+}
+
+.enter-chat-text {
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+}
+
+.group-cover {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #F5DEB3; /* 小麦色 */
+  flex-shrink: 0;
+  border: 2px solid rgba(139, 69, 19, 0.2);
+}
+
+.group-info {
+  flex: 1;
+  margin-left: 12px;
+  overflow: hidden;
+}
+
+.group-name {
+  font-size: 16px;
+  color: #8B4513; /* 棕色 */
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.group-desc {
+  font-size: 13px;
+  color: #A0522D; /* 深棕色 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arrow-icon {
+  font-size: 20px;
+  color: #CD853F; /* 秘鲁色 */
+  margin-left: 8px;
+}
+
+/* 群成员区域 */
+.section {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.8); /* 半透明白色 */
+  margin: 12px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 14px;
+  color: #8B4513; /* 棕色 */
+  font-weight: 600;
+}
+
+.section-action {
+  font-size: 13px;
+  color: #CD853F; /* 秘鲁色 */
+}
+
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.member-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.member-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #F5DEB3; /* 小麦色 */
+  border: 2px solid rgba(139, 69, 19, 0.2);
+}
+
+.member-name {
+  font-size: 11px;
+  color: #A0522D; /* 深棕色 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  text-align: center;
+}
+
+.add-btn .add-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(245, 222, 179, 0.5); /* 半透明小麦色 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #CD853F; /* 秘鲁色 */
+  border: 2px dashed rgba(139, 69, 19, 0.3);
+}
+
+/* 操作区域 */
+.action-section {
+  background: rgba(255, 255, 255, 0.8); /* 半透明白色 */
+  margin: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  position: relative;
+}
+
+.action-text {
+  font-size: 15px;
+  color: #8B4513; /* 棕色 */
+  flex: 1;
+  font-weight: 500;
+}
+
+.action-hint {
+  font-size: 12px;
+  color: #A0522D; /* 深棕色 */
+  margin-right: auto;
+  margin-left: 12px;
+}
+
+.share-icons {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.share-icon {
+  font-size: 20px;
+}
+
+/* 设置列表 */
+.setting-section {
+  background: rgba(255, 255, 255, 0.8); /* 半透明白色 */
+  margin: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+  min-height: 56px;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.setting-text {
+  font-size: 15px;
+  color: #8B4513; /* 棕色 */
+  font-weight: 500;
+}
+
+.setting-hint {
+  font-size: 12px;
+  color: #A0522D; /* 深棕色 */
+}
+
+.setting-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.setting-value {
+  font-size: 14px;
+  color: #CD853F; /* 秘鲁色 */
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qr-icon {
+  font-size: 18px;
+  color: #CD853F; /* 秘鲁色 */
+}
+
+.switch-item {
+  align-items: center;
+}
+
+.switch {
+  transform: scale(0.8);
+}
+
+/* 退出群聊 */
+.quit-section {
+  padding: 12px;
+}
+
+.quit-btn {
+  background: rgba(255, 255, 255, 0.8); /* 半透明白色 */
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.quit-text {
+  font-size: 15px;
+  color: #D2691E; /* 巧克力色 */
+  font-weight: 500;
+}
+
+
+

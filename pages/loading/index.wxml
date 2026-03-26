@@ -1,0 +1,19 @@
+<view class="loading-container">
+  <view class="background-gif">
+    <image src="{{backgroundImage}}" mode="aspectFill" class="gif-background"></image>
+  </view>
+
+  <view class="loading-content">
+    <text class="loading-text">loading</text>
+    
+    <!-- 进度条容器 -->
+    <view class="progress-container">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progress}}%">
+          <view class="progress-shine"></view>
+        </view>
+      </view>
+      <text class="progress-text">{{progress}}%</text>
+    </view>
+  </view>
+</view>

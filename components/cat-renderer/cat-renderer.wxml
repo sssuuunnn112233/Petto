@@ -1,0 +1,27 @@
+<view class="cat-renderer cat-renderer-{{size}}">
+  <!-- 渲染所有图层 -->
+  <view 
+    wx:for="{{renderLayers}}" 
+    wx:key="type"
+    class="cat-layer cat-layer-{{item.type}}"
+    style="left: {{item.left}}; top: {{item.top}}; transform: translate(-50%, -50%) {{item.transform}}; z-index: {{item.zIndex}};">
+    
+    <image 
+      class="cat-image"
+      src="{{item.imagePath}}"
+      mode="aspectFit"
+      data-layer-type="{{item.type}}"
+      binderror="onImageError"
+      bindload="onImageLoad"
+    />
+  </view>
+  
+  <!-- 调试信息 -->
+  <view wx:if="{{debug}}" class="debug-info">
+    <text>Body Type: {{catConfig.bodyType}}</text>
+    <text>Layers: {{renderLayers.length}}</text>
+    <block wx:for="{{renderLayers}}" wx:key="type">
+      <text>{{item.type}}: {{item.imagePath}}</text>
+    </block>
+  </view>
+</view>

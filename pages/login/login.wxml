@@ -1,0 +1,71 @@
+<!--pages/login/login.wxml-->
+<view class="login-container">
+  <!-- 背景装饰 -->
+  <view class="bg-decoration">
+    <view class="bg-circle circle-1"></view>
+    <view class="bg-circle circle-2"></view>
+    <view class="bg-circle circle-3"></view>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="login-content">
+    <!-- Logo区域 -->
+    <view class="logo-section">
+      <view class="logo-icon">🐾</view>
+      <view class="app-name">Petto</view>
+      <view class="app-slogan">你的专属虚拟宠物伙伴</view>
+    </view>
+
+    <!-- 功能介绍 -->
+    <view class="features-section">
+      <view class="feature-item">
+        <view class="feature-icon">🎮</view>
+        <view class="feature-text">趣味小游戏</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">💬</view>
+        <view class="feature-text">智能聊天</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">🏆</view>
+        <view class="feature-text">成长记录</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">👥</view>
+        <view class="feature-text">社区分享</view>
+      </view>
+    </view>
+
+    <!-- 登录按钮区域 -->
+    <view class="login-section">
+      <button 
+        class="wx-login-btn {{isLoading ? 'loading' : ''}}"
+        bindtap="onWxLogin"
+        disabled="{{isLoading}}"
+      >
+        <view class="btn-content">
+          <view class="wx-icon" wx:if="{{!isLoading}}">👤</view>
+          <view class="loading-icon" wx:else>⏳</view>
+          <text class="btn-text">{{isLoading ? '登录中...' : '微信快速登录'}}</text>
+        </view>
+      </button>
+
+      <view class="login-tips">
+        <text class="tip-text">登录即表示同意</text>
+        <text class="link-text" bindtap="onPrivacyPolicy">《隐私政策》</text>
+      </view>
+
+      <!-- 其他选项 -->
+      <view class="other-options">
+        <text class="guest-btn" bindtap="onGuestMode">暂时跳过</text>
+        <text class="divider">|</text>
+        <text class="contact-btn" bindtap="onContactService">联系客服</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="bottom-decoration">
+    <view class="pet-silhouette">🐱</view>
+  </view>
+</view>

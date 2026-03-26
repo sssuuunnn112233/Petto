@@ -1,0 +1,258 @@
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 导航栏背景设为白色 */
+.weui-navigation-bar {
+  background-color: #FFF !important;
+  position: relative;
+  z-index: 999;
+}
+
+.weui-navigation-bar__inner {
+  background-color: #FFF !important;
+  background: #FFF !important;
+}
+
+.weui-navigation-bar__left,
+.weui-navigation-bar__center,
+.weui-navigation-bar__right {
+  background-color: transparent;
+}
+
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.game-container {
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* 游戏标题 */
+.game-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title-text {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* 游戏列表 */
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 游戏卡片 */
+.game-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/* 萌宠消消乐卡片 */
+.match3-card .game-bg {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pet-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.snow-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.snowflakes {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  z-index: 3;
+}
+
+.snowflake {
+  font-size: 16px;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(200px); opacity: 0; }
+}
+
+.mountains {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+}
+
+.mountain {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(180deg, #B0C4DE 0%, #E6E6FA 100%);
+  border-radius: 50% 50% 0 0;
+}
+
+.mountain-1 {
+  width: 60px;
+  height: 40px;
+  left: 20px;
+}
+
+.mountain-2 {
+  width: 80px;
+  height: 60px;
+  left: 50px;
+}
+
+.mountain-3 {
+  width: 50px;
+  height: 35px;
+  right: 30px;
+}
+
+.trees {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.tree {
+  font-size: 24px;
+}
+
+.cabin {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  font-size: 20px;
+  z-index: 2;
+}
+
+.game-character {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 3;
+}
+
+.cat-character, .dog-character {
+  font-size: 32px;
+}
+
+.snowman, .penguin {
+  font-size: 24px;
+}
+
+/* 线条小狗捕鱼卡片 */
+.fishing-card .game-bg {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fish-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* 游戏信息 */
+.game-info {
+  padding: 20px;
+  background: #fff;
+}
+
+.game-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.game-desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.play-btn {
+  background: linear-gradient(45deg, #90EE90, #98FB98);
+  color: #333;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(144, 238, 144, 0.3);
+}
+

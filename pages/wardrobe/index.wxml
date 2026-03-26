@@ -1,0 +1,96 @@
+<wxs module="utils">
+  var isWorn = function(wornOutfits, category) {
+    for (var i = 0; i < wornOutfits.length; i++) {
+      if (wornOutfits[i].category === category) {
+        return true;
+      }
+    }
+    return false;
+  };
+  module.exports.isWorn = isWorn;
+</wxs>
+
+<page-meta>
+  <navigation-bar title="衣橱" back="{{true}}" delta="2" color="black" background="#FFF" bind:back="onNavBack"></navigation-bar>
+</page-meta>
+
+<view class="container">
+  <image class="bg" src="/assets/wardrobe_background.jpg" mode="aspectFill" />
+
+  <view class="top-info">
+    <view class="pet-info">
+      <view class="pet-name-container">
+        <text class="pet-name">{{petName}}</text>
+        <text class="pet-age">年龄: {{petAge}} 岁</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="preview-area" bindtouchstart="onDropZoneTouchStart">
+    <!-- 自定义宠物基础图层（使用新的渲染组件） -->
+    <view wx:if="{{useCustomPet && petCustomization}}" class="pet-base custom-pet-base">
+      <cat-renderer 
+        cat-config="{{petCustomization}}" 
+        size="pet"
+        debug="{{false}}"
+        bind:imageerror="onWardrobeImageError"
+      />
+    </view>
+    
+    <!-- 默认宠物基础图 -->
+    <image wx:else class="pet-base" src="/assets/pet_idle.png" />
+    
+    <!-- 穿戴的装备 -->
+    <block wx:for="{{wornOutfits}}" wx:key="id" wx:for-index="index">
+      <image 
+        class="pet-outfit" 
+        src="{{item.src}}" 
+        data-category="{{item.category}}"
+        data-index="{{index}}"
+        style="left: {{item.x}}rpx; top: {{item.y}}rpx;"
+        mode="aspectFit"
+        bindtouchstart="onOutfitDragStart"
+        bindtouchmove="onOutfitDragMove"
+        bindtouchend="onOutfitDragEnd"
+        bindtap="onOutfitTap" />
+    </block>
+    <view wx:if="{{isDragging}}" class="drop-hint">拖到这里装扮</view>
+  </view>
+
+  <view class="action-buttons" style="height: 151rpx; display: flex; box-sizing: border-box">
+    <button class="btn-save" bindtap="onSave">保存装扮</button>
+    <button class="btn-clear" bindtap="onClearAll">清空装扮</button>
+  </view>
+
+  <view class="tabs">
+    <block wx:for="{{categories}}" wx:key="key">
+      <view class="tab-item {{item.key === selectedCategory ? 'active' : ''}}" bindtap="onSelectCategory" data-key="{{item.key}}">
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="grid">
+    <block wx:for="{{filteredOutfits}}" wx:key="id">
+      <view 
+        class="grid-item {{utils.isWorn(wornOutfits, item.category) ? 'worn' : ''}}" 
+        bindtouchstart="onDragStart" 
+        bindtouchmove="onDragMove" 
+        bindtouchend="onDragEnd"
+        data-id="{{item.id}}"
+        data-category="{{item.category}}" style="width: 139rpx; display: flex; box-sizing: border-box">
+        <image src="{{item.thumb}}" mode="aspectFit" />
+        <text class="title">{{item.name}}</text>
+        <view wx:if="{{utils.isWorn(wornOutfits, item.category)}}" class="worn-badge">已穿</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 拖拽预览层 -->
+  <view wx:if="{{isDragging && draggingItem}}" class="drag-preview" style="left: {{dragX}}rpx; top: {{dragY}}rpx;">
+    <image src="{{draggingItem.thumb}}" mode="aspectFit" />
+    <!-- 调试：显示中心点 -->
+    <view class="drag-center-mark"></view>
+  </view>
+</view>
+

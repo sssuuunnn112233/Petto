@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b64a52de-eb59-4a16-9533-b4cf286b7699" name="Changes" comment="The Last Version!!!!!!!!" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="35NRgHTB3Tdu5uGk84CglyLj9lf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/Petto/Petto",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.29188.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.29188.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b64a52de-eb59-4a16-9533-b4cf286b7699" name="Changes" comment="" />
+      <created>1762948652732</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762948652732</updated>
+      <workItem from="1762948654068" duration="1775000" />
+      <workItem from="1764002309210" duration="965000" />
+      <workItem from="1764077249417" duration="21000" />
+      <workItem from="1764158266969" duration="2025000" />
+      <workItem from="1764568041210" duration="2388000" />
+      <workItem from="1764589719539" duration="94000" />
+      <workItem from="1764679741335" duration="784000" />
+      <workItem from="1764682656190" duration="2144000" />
+      <workItem from="1764772698224" duration="10000" />
+      <workItem from="1765949943852" duration="3119000" />
+      <workItem from="1766458469730" duration="284000" />
+      <workItem from="1766897331427" duration="88000" />
+      <workItem from="1767021332569" duration="654000" />
+      <workItem from="1767095205316" duration="6035000" />
+      <workItem from="1767254041905" duration="127000" />
+      <workItem from="1767276878732" duration="1162000" />
+      <workItem from="1774516436376" duration="179000" />
+    </task>
+    <task id="LOCAL-00001" summary="游戏和个人主页">
+      <option name="closed" value="true" />
+      <created>1764002443395</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1764002443395</updated>
+    </task>
+    <task id="LOCAL-00002" summary="游戏,个人主页ui更改,捏脸素材">
+      <option name="closed" value="true" />
+      <created>1764679808609</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764679808609</updated>
+    </task>
+    <task id="LOCAL-00003" summary="游戏,个人主页ui更改,捏脸素材">
+      <option name="closed" value="true" />
+      <created>1764743567038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764743567038</updated>
+    </task>
+    <task id="LOCAL-00004" summary="游戏，社区，消息，个人主页后端+数据库，以及补充新页面">
+      <option name="closed" value="true" />
+      <created>1767021441585</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1767021441585</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Version1.0">
+      <option name="closed" value="true" />
+      <created>1767070626035</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1767070626035</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Version1.1">
+      <option name="closed" value="true" />
+      <created>1767086454858</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1767086454858</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Version1.2">
+      <option name="closed" value="true" />
+      <created>1767095351401</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1767095351401</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Final Version1.4">
+      <option name="closed" value="true" />
+      <created>1767112097336</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1767112097337</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Final Version1.5">
+      <option name="closed" value="true" />
+      <created>1767158775191</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1767158775192</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Absolutely Final Version1.6">
+      <option name="closed" value="true" />
+      <created>1767168561553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1767168561553</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Version1.7">
+      <option name="closed" value="true" />
+      <created>1767171503972</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1767171503972</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Version1.8">
+      <option name="closed" value="true" />
+      <created>1767254110897</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1767254110897</updated>
+    </task>
+    <task id="LOCAL-00013" summary="The Last Version!!!!!!!!">
+      <option name="closed" value="true" />
+      <created>1767278083849</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1767278083849</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="游戏和个人主页" />
+    <MESSAGE value="游戏,个人主页ui更改,捏脸素材" />
+    <MESSAGE value="游戏，社区，消息，个人主页后端+数据库，以及补充新页面" />
+    <MESSAGE value="Version1.0" />
+    <MESSAGE value="Version1.1" />
+    <MESSAGE value="Version1.2" />
+    <MESSAGE value="Final Version1.4" />
+    <MESSAGE value="Final Version1.5" />
+    <MESSAGE value="Absolutely Final Version1.6" />
+    <MESSAGE value="Version1.7" />
+    <MESSAGE value="Version1.8" />
+    <MESSAGE value="The Last Version!!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="The Last Version!!!!!!!!" />
+  </component>
+</project>

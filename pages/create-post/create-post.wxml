@@ -1,0 +1,159 @@
+<!--pages/create-post/create-post.wxml-->
+<wxs module="utils">
+  var isSelected = function(selectedTags, tag) {
+    if (!selectedTags || !tag) return false;
+    for (var i = 0; i < selectedTags.length; i++) {
+      if (selectedTags[i] === tag) {
+        return true;
+      }
+    }
+    return false;
+  };
+  module.exports.isSelected = isSelected;
+</wxs>
+
+<view class="page">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="back-btn" bindtap="onBack">
+      <text class="icon">‹</text>
+    </view>
+    <view class="header-title">发布笔记</view>
+    <view class="publish-btn" bindtap="onPublish">
+      <text class="publish-text {{isPublishing ? 'disabled' : ''}}">发布</text>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view class="content-scroll" scroll-y>
+    <!-- 媒体类型选择 -->
+    <view class="section">
+      <view class="section-title">内容类型</view>
+      <view class="media-type-selector">
+        <view 
+          class="type-item {{mediaType === 'image' ? 'active' : ''}}"
+          data-type="image"
+          bindtap="onSelectMediaType"
+        >
+          <text class="type-icon">📷</text>
+          <text class="type-text">图片</text>
+        </view>
+        <view 
+          class="type-item {{mediaType === 'video' ? 'active' : ''}}"
+          data-type="video"
+          bindtap="onSelectMediaType"
+        >
+          <text class="type-icon">🎬</text>
+          <text class="type-text">视频</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 图片选择区域 -->
+    <view class="section" wx:if="{{mediaType === 'image'}}">
+      <view class="section-title">选择图片（最多9张）</view>
+      <view class="media-grid">
+        <!-- 已选图片 -->
+        <view 
+          wx:for="{{images}}" 
+          wx:key="index"
+          class="media-item"
+        >
+          <image class="media-preview" src="{{item}}" mode="aspectFill" />
+          <view class="delete-btn" data-index="{{index}}" bindtap="onDeleteImage">
+            <text class="delete-icon">✕</text>
+          </view>
+        </view>
+        
+        <!-- 添加按钮 -->
+        <view 
+          wx:if="{{images.length < 9}}"
+          class="media-item add-btn"
+          bindtap="onChooseImage"
+        >
+          <text class="add-icon">+</text>
+          <text class="add-text">添加</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 视频选择区域 -->
+    <view class="section" wx:if="{{mediaType === 'video'}}">
+      <view class="section-title">选择视频</view>
+      <view class="video-container">
+        <view wx:if="{{!video}}" class="video-placeholder" bindtap="onChooseVideo">
+          <text class="placeholder-icon">🎬</text>
+          <text class="placeholder-text">点击选择视频</text>
+        </view>
+        <view wx:else class="video-preview">
+          <video 
+            class="video-player"
+            src="{{video}}"
+            controls
+            show-center-play-btn="{{true}}"
+          ></video>
+          <view class="delete-btn video-delete" bindtap="onDeleteVideo">
+            <text class="delete-icon">✕</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 标题输入 -->
+    <view class="section">
+      <view class="section-title">标题</view>
+      <input 
+        class="title-input"
+        type="text"
+        placeholder="输入笔记标题..."
+        value="{{title}}"
+        bindinput="onTitleInput"
+        maxlength="50"
+      />
+    </view>
+
+    <!-- 分类选择 -->
+    <view class="section">
+      <view class="section-title">分类</view>
+      <view class="category-list">
+        <view 
+          wx:for="{{categories}}"
+          wx:key="id"
+          class="category-item {{item.id === category ? 'active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onSelectCategory"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 标签选择 -->
+    <view class="section">
+      <view class="section-title">标签（最多3个）</view>
+      <view class="tag-list">
+        <view 
+          wx:for="{{availableTags}}"
+          wx:key="*this"
+          wx:for-item="tag"
+          class="tag-item {{utils.isSelected(selectedTags, tag) ? 'selected' : ''}}"
+          data-tag="{{tag}}"
+          catchtap="onToggleTag"
+        >
+          {{tag}}
+        </view>
+      </view>
+    </view>
+    
+    <!-- 底部占位 -->
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+
+  <!-- 底部发布按钮 -->
+  <view class="bottom-bar">
+    <view class="publish-button {{isPublishing ? 'disabled' : ''}}" bindtap="onPublish">
+      <text class="publish-button-text">{{isPublishing ? '发布中...' : '发布'}}</text>
+    </view>
+  </view>
+</view>
+

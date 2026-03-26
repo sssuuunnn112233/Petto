@@ -1,0 +1,79 @@
+<!--关注页面-->
+<view class="message-page-container">
+  <!-- 自定义头部 -->
+  <message-header title="新增关注" bind:back="onBack" />
+
+  <view class="message-content-area">
+    <!-- 下拉刷新提示 -->
+    <view wx:if="{{refreshing}}" class="refresh-container">
+      <text class="refresh-text">正在刷新...</text>
+    </view>
+
+    <!-- 空状态 -->
+    <empty-state 
+      wx:if="{{!loading && follows.length === 0}}"
+      icon="👥"
+      title="还没有新的关注者"
+      description="分享更多精彩内容吸引关注吧"
+      action-text="去发布内容"
+      show-action="{{true}}"
+      bind:action="onGoToPost"
+    />
+
+    <!-- 加载中骨架屏 -->
+    <view wx:if="{{loading && follows.length === 0}}" class="message-list">
+      <view wx:for="{{[1,2,3]}}" wx:key="*this" class="skeleton-item">
+        <view style="display: flex; align-items: center;">
+          <view class="skeleton-avatar"></view>
+          <view style="flex: 1; margin-left: 24rpx;">
+            <view class="skeleton-line short"></view>
+            <view class="skeleton-line long"></view>
+          </view>
+          <view class="skeleton-line" style="width: 120rpx; height: 60rpx; border-radius: 30rpx;"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 关注列表 -->
+    <view wx:if="{{follows.length > 0}}" class="message-list">
+      <view 
+        wx:for="{{follows}}" 
+        wx:key="id" 
+        class="message-item fade-in"
+      >
+        <image 
+          class="user-avatar" 
+          src="{{item.avatar}}" 
+          mode="aspectFill"
+          data-item="{{item}}"
+          bindtap="onViewProfile"
+        />
+        <view class="message-item-content">
+          <view class="user-info">
+            <text class="user-name">{{item.user}}</text>
+            <text class="message-action">{{item.desc}}</text>
+          </view>
+          <view class="message-time">{{item.time}}</view>
+          <view wx:if="{{item.bio}}" class="user-bio">{{item.bio}}</view>
+        </view>
+        <button 
+          class="message-btn {{item.followed ? 'message-btn-done' : 'message-btn-primary'}}" 
+          data-id="{{item.id}}"
+          bindtap="onFollowBack"
+        >
+          {{item.followed ? '已关注' : '关注'}}
+        </button>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view wx:if="{{loadingMore}}" class="loading-container">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 没有更多数据 -->
+    <view wx:if="{{noMore && follows.length > 0}}" class="no-more-container">
+      <text class="no-more-text">没有更多了</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,99 @@
+<view class="container">
+  <!-- 顶部按钮 -->
+  <view class="header">
+    <view class="btn-back" bindtap="onBack">BACK</view>
+    <view class="btn-ok" bindtap="onSave">OK!</view>
+  </view>
+
+  <!-- 猫咪预览 -->
+  <view class="preview">
+    <cat-renderer 
+      cat-config="{{selected}}" 
+      size="normal"
+      debug="{{false}}"
+      bind:imageerror="onImageError"
+    />
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="tabs">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="key"
+      class="tab {{item.key === selectedCategory ? 'active' : ''}}"
+      bindtap="onSelectCategory"
+      data-key="{{item.key}}">
+      <image class="tab-icon" src="{{item.icon}}" mode="aspectFit" />
+    </view>
+  </view>
+
+  <!-- 选项网格 -->
+  <view class="options">
+    <!-- 身体类型 -->
+    <block wx:if="{{selectedCategory === 'bodyType'}}">
+      <view 
+        wx:for="{{bodyTypeOptions}}" 
+        wx:key="id"
+        class="option {{item.id === selected.bodyType ? 'selected' : ''}}"
+        bindtap="onSelectOption"
+        data-category="bodyType"
+        data-id="{{item.id}}">
+        <image class="option-img" src="{{item.path}}" mode="aspectFit" show-menu-by-longpress />
+      </view>
+    </block>
+
+    <!-- 花纹 -->
+    <block wx:if="{{selectedCategory === 'pattern'}}">
+      <view 
+        wx:for="{{patternOptions}}" 
+        wx:key="id"
+        class="option {{item.id === selected.pattern ? 'selected' : ''}}"
+        bindtap="onSelectOption"
+        data-category="pattern"
+        data-id="{{item.id}}">
+        <image wx:if="{{item.path}}" class="option-img" src="{{item.path}}" mode="aspectFit" />
+      </view>
+    </block>
+
+    <!-- 眼睛 -->
+    <block wx:if="{{selectedCategory === 'eye'}}">
+      <view 
+        wx:for="{{eyeOptions}}" 
+        wx:key="id"
+        class="option {{item.id === selected.eye ? 'selected' : ''}}"
+        bindtap="onSelectOption"
+        data-category="eye"
+        data-id="{{item.id}}">
+        <image class="option-img" src="{{item.path}}" mode="aspectFit" />
+      </view>
+    </block>
+
+
+    <!-- 鼻子 -->
+    <block wx:if="{{selectedCategory === 'nose'}}">
+      <view 
+        wx:for="{{noseOptions}}" 
+        wx:key="id"
+        class="option {{item.id === selected.nose ? 'selected' : ''}}"
+        bindtap="onSelectOption"
+        data-category="nose"
+        data-id="{{item.id}}">
+        <image class="option-img" src="{{item.path}}" mode="aspectFit" />
+      </view>
+    </block>
+
+    <!-- 嘴型 -->
+    <block wx:if="{{selectedCategory === 'noseMouthPattern'}}">
+      <view 
+        wx:for="{{noseMouthPatternOptions}}" 
+        wx:key="id"
+        class="option {{item.id === selected.noseMouthPattern ? 'selected' : ''}}"
+        bindtap="onSelectOption"
+        data-category="noseMouthPattern"
+        data-id="{{item.id}}">
+        <image wx:if="{{item.path}}" class="option-img" src="{{item.path}}" mode="aspectFit" />
+      </view>
+    </block>
+    
+  </view>
+</view>

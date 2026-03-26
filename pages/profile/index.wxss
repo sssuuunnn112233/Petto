@@ -1,0 +1,1035 @@
+page {
+  height: 100vh;
+  background-color: #FFF8DC;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.profile {
+  padding: 16px;
+  background-color: #FFF8DC;
+}
+
+/* 用户资料区域 */
+.user-section {
+  margin-bottom: 16px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.user-details {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-right: 8px;
+}
+
+.gender-icon {
+  font-size: 16px;
+  color: #FF69B4;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.arrow-icon {
+  font-size: 18px;
+  color: #ccc;
+  margin-left: 8px;
+}
+
+/* 状态栏 */
+.status-bar {
+  margin-bottom: 20px;
+}
+
+.status-content {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #FFF8DC;
+  border-radius: 20px;
+  border: 1px solid #FFE4B5;
+}
+
+.running-cat {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.status-text {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 每日签到区域 */
+.checkin-section {
+  margin-bottom: 20px;
+}
+
+.checkin-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.checkin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.checkin-title {
+  display: flex;
+  align-items: center;
+}
+
+.checkin-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+
+.checkin-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkin-history {
+  font-size: 14px;
+  color: #8B4513;
+}
+
+.checkin-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.checkin-info {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.checkin-stat {
+  text-align: center;
+  flex: 1;
+}
+
+.checkin-stat .stat-number {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #8B4513;
+  margin-bottom: 4px;
+}
+
+.checkin-stat .stat-label {
+  font-size: 11px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.checkin-btn {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #8B4513;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  flex-shrink: 0;
+  min-width: 70px;
+  max-width: 70px;
+}
+
+.checkin-btn.checked {
+  background: #E8E8E8;
+  color: #8B4513;
+  box-shadow: none;
+}
+
+.checkin-btn-text {
+  font-size: 13px;
+  color: #8B4513;
+}
+
+/* 我的宠物区域 */
+.pets-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.pets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pet-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: #f8f8f8;
+  border-radius: 12px;
+}
+
+.pet-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.pet-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.pet-info {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.pet-name {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.pet-name text:first-child {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-right: 6px;
+}
+
+.pet-gender {
+  font-size: 14px;
+  color: #FF69B4;
+}
+
+.pet-details {
+  font-size: 12px;
+  color: #666;
+}
+
+.paw-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* 功能区域 */
+.functions-section {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.function-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.function-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.function-item .arrow-icon {
+  font-size: 16px;
+  color: #ccc;
+  margin-left: 0;
+}
+/* 云端状态指示器 */
+.cloud-status {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  backdrop-filter: blur(10px);
+}
+
+.cloud-status.online {
+  background: rgba(76, 175, 80, 0.1);
+  border-color: rgba(76, 175, 80, 0.3);
+}
+
+.cloud-status.offline {
+  background: rgba(158, 158, 158, 0.1);
+  border-color: rgba(158, 158, 158, 0.3);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.cloud-status.online .status-dot {
+  background: #4CAF50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
+}
+
+.cloud-status.offline .status-dot {
+  background: #9E9E9E;
+}
+
+.status-text {
+  font-size: 10px;
+  color: #666;
+  font-weight: 500;
+}
+
+.cloud-status.online .status-text {
+  color: #4CAF50;
+}
+
+.cloud-status.offline .status-text {
+  color: #9E9E9E;
+}
+
+/* 我的动态区域 */
+.posts-section {
+  margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.post-count {
+  font-size: 14px;
+  color: #999;
+  margin-left: 4px;
+}
+
+.game-icon {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.view-all-btn {
+  font-size: 14px;
+  color: #8B4513;
+}
+
+.posts-preview {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.posts-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.summary-number {
+  font-size: 24px;
+  font-weight: 600;
+  color: #8B4513;
+  line-height: 1;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.empty-posts {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.empty-text {
+  display: block;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.create-post-btn {
+  font-size: 14px;
+  color: #8B4513;
+}
+
+/* 游戏记录区域 */
+.game-records-section {
+  margin-bottom: 16px;
+}
+
+.game-stats-preview {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.game-stats-preview .stat-item {
+  text-align: center;
+  flex: 1;
+  position: relative;
+}
+
+.game-stats-preview .stat-decoration {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  opacity: 0.6;
+}
+
+.game-stats-preview .stat-number {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.game-stats-preview .stat-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* 加载状态 */
+.loading-section {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+.loading-text {
+  font-size: 14px;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .summary-number {
+    font-size: 20px;
+  }
+  
+  .summary-label {
+    font-size: 11px;
+  }
+}
+
+/* 签到记录弹窗 */
+.checkin-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.checkin-modal-content {
+  background: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.checkin-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.checkin-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkin-modal-close {
+  font-size: 24px;
+  color: #999;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f5f5f5;
+}
+
+/* 签到统计区域 */
+.checkin-stats {
+  padding: 20px;
+}
+
+.checkin-stat-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.stat-icon {
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.stat-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkin-stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.stat-detail {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #666;
+  margin-left: 4px;
+}
+
+.reward-rules {
+  background: #FFF8DC;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.rule-text {
+  display: block;
+  font-size: 12px;
+  color: #8B4513;
+  margin-bottom: 4px;
+}
+
+.rule-text:last-child {
+  margin-bottom: 0;
+}
+
+/* 猫爪日历 */
+.checkin-calendar {
+  padding: 0 20px 20px;
+}
+
+.calendar-header {
+  margin-bottom: 16px;
+}
+
+.calendar-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8B4513;
+}
+
+.calendar-grid {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+}
+
+.calendar-day.today {
+  background: #FFE4B5;
+  border-color: #FFD700;
+}
+
+.calendar-day.checked {
+  background: #E8F5E8;
+  border-color: #4CAF50;
+}
+
+.calendar-day.today.checked {
+  background: #FFD700;
+  border-color: #FFA500;
+}
+
+.day-number {
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+}
+
+.calendar-day:not(.isCurrentMonth) .day-number {
+  color: #ccc;
+}
+
+.paw-icon {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+/* 弹窗底部 */
+.checkin-modal-footer {
+  padding: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.modal-confirm-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #8B4513;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .checkin-modal-content {
+    width: 95%;
+  }
+  
+  .checkin-stat-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .calendar-days {
+    gap: 2px;
+  }
+  
+  .calendar-day {
+    border-radius: 6px;
+  }
+  
+  .day-number {
+    font-size: 11px;
+  }
+  
+  .paw-icon {
+    font-size: 8px;
+  }
+}
+/* 帖子删除按钮 */
+.post-item {
+  position: relative;
+}
+
+.post-delete-btn {
+  width: 100%;
+  font-size: 10px !important;
+  padding: 2px 4px !important;
+  height: 20px !important;
+  line-height: 16px !important;
+  margin: 0 !important;
+}
+
+/* 帖子操作按钮 */
+.post-actions {
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 0 0 8px 8px;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: #F5DEB3;
+  border-radius: 12px;
+  color: #8B4513;
+  font-size: 12px;
+  border: 1px solid #DEB887;
+}
+
+.delete-icon {
+  font-size: 12px;
+  margin-right: 2px;
+}
+
+.delete-text {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.delete-button:active {
+  background: #DEB887;
+  transform: scale(0.95);
+}
+/* 装饰性宠物图标 */
+.decorative-pets {
+  position: relative;
+  height: 0;
+  z-index: 1;
+}
+
+.pet-decoration {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: float 3s ease-in-out infinite;
+}
+
+.pet-top-left {
+  top: 20px;
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.pet-top-right {
+  top: 20px;
+  right: 20px;
+  animation-delay: 1s;
+}
+
+/* 头像装饰 */
+.avatar {
+  position: relative;
+}
+
+.avatar-decoration {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: #fff;
+}
+
+/* 状态栏装饰 */
+.status-content {
+  position: relative;
+}
+
+.status-decoration {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* 游戏图标 */
+.game-icon-img {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+/* 统计装饰 */
+.stat-item {
+  position: relative;
+}
+
+.stat-decoration {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* 功能图标调整 */
+.function-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+/* 底部装饰 */
+.bottom-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.bottom-pet {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.pet-trail {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.trail-pet {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: float 2s ease-in-out infinite;
+}
+
+.trail-pet:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.trail-pet:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.trail-pet:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* 动画效果 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .pet-decoration {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .avatar-decoration {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .bottom-pet {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .trail-pet {
+    width: 20px;
+    height: 20px;
+  }
+}
+/* 修复统计数据按钮 */
+.fix-stats-section {
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+.fix-stats-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 40rpx;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: white;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 4rpx 15rpx rgba(255, 107, 107, 0.3);
+  transition: all 0.3s ease;
+}
+
+.fix-stats-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 10rpx rgba(255, 107, 107, 0.3);
+}
+
+.fix-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.fix-text {
+  font-size: 28rpx;
+}

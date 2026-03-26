@@ -1,0 +1,138 @@
+<!--index.wxml-->
+<view class="page">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="header-left">
+      <view class="search-btn" bindtap="{{showSearchBar ? 'onCloseSearch' : 'onSearch'}}">
+        <text class="icon">{{showSearchBar ? '✕' : '🔍'}}</text>
+      </view>
+    </view>
+
+    <!-- 标题 -->
+    <view class="header-title" wx:if="{{!showSearchBar}}">
+      Petto
+      <!-- 云开发状态指示器 -->
+      <view class="cloud-status {{useCloudData && !cloudError ? 'online' : 'offline'}}">
+        <view class="status-dot"></view>
+        <text class="status-text">{{useCloudData && !cloudError ? '云端' : '本地'}}</text>
+      </view>
+    </view>
+
+    <!-- 搜索栏 -->
+    <view class="search-bar" wx:if="{{showSearchBar}}">
+      <input
+        class="search-input"
+        type="text"
+        placeholder="搜索标题、标签、作者..."
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        focus="{{showSearchBar}}"
+      />
+      <view class="search-clear" wx:if="{{searchKeyword}}" bindtap="onCloseSearch">
+        <text class="icon">✕</text>
+      </view>
+    </view>
+
+    <view class="header-right">
+      <!-- 空白占位，保持对称 -->
+    </view>
+  </view>
+
+  <!-- 分类导航栏 -->
+  <view class="category-nav">
+    <scroll-view class="category-scroll" scroll-x>
+      <view class="category-list">
+        <view
+          wx:for="{{categories}}"
+          wx:key="id"
+          class="category-item {{item.active ? 'active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onCategoryChange"
+        >
+          {{item.name}}
+        </view>
+        <view class="category-more">
+          <text class="icon">▼</text>
+        </view>
+        <!-- 测试按钮 -->
+        <view class="test-btn" bindtap="testCloudConnection">
+          <text class="test-text">测试</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view
+    class="content-scroll"
+    scroll-y
+    enable-back-to-top
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onRefresh"
+    bindscrolltolower="onLoadMore"
+    lower-threshold="100"
+  >
+    <!-- 搜索结果提示 -->
+    <view class="search-result-tip" wx:if="{{isSearching}}">
+      <text class="tip-text">找到 {{posts.length}} 条相关内容</text>
+      <text class="tip-keyword">"{{searchKeyword}}"</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!refreshing && !loadingMore && posts.length === 0}}">
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">暂无内容</text>
+    </view>
+
+    <view class="content-grid" wx:if="{{posts.length > 0}}">
+      <view
+        wx:for="{{posts}}"
+        wx:key="id"
+        class="post-item"
+      >
+        <view class="post-content" bindtap="onOpenPost" data-id="{{item.id}}" data-post-id="{{item.postId}}" data-pokemon-id="{{item.pokemonId}}" data-title="{{item.title}}" data-author-name="{{item.author.name}}" data-author-avatar="{{item.author.avatar}}" data-image="{{item.image}}" data-type="{{item.type}}" data-video="{{item.video}}">
+          <image
+            class="post-image game-{{item.gameStyle}}"
+            src="{{item.image}}"
+            mode="aspectFill"
+            lazy-load="{{true}}"
+            binderror="onImageError"
+            data-id="{{item.id}}"
+            data-post-id="{{item.postId}}"
+          />
+
+          <view class="post-info">
+            <view class="post-title">{{item.title}}</view>
+            <view class="post-bottom">
+              <view class="post-author">
+                <image class="author-avatar" src="{{item.author.avatar}}" mode="aspectFill" />
+                <text class="author-name">{{item.author.name}}</text>
+              </view>
+              <view
+                class="like-container {{item.liked ? 'liked' : ''}}"
+                data-id="{{item.id}}"
+                catchtap="onToggleLike"
+              >
+                <text class="like-icon">{{item.liked ? '❤' : '🤍'}}</text>
+                <text class="like-count">{{item.likeCount}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="load-more">
+      <text wx:if="{{loadingMore}}">加载中...</text>
+      <text wx:elif="{{noMore}}">没有更多了</text>
+      <text wx:else>上拉加载更多</text>
+    </view>
+  </scroll-view>
+
+  <!-- 悬浮发布按钮 -->
+  <view class="fab-button" bindtap="onCreatePost">
+    <text class="fab-icon">+</text>
+  </view>
+</view>

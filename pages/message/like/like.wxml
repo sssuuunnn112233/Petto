@@ -1,0 +1,67 @@
+<!--点赞页面-->
+<view class="message-page-container">
+  <!-- 自定义头部 -->
+  <message-header title="赞和收藏" bind:back="onBack" />
+
+  <view class="message-content-area">
+    <!-- 下拉刷新提示 -->
+    <view wx:if="{{refreshing}}" class="refresh-container">
+      <text class="refresh-text">正在刷新...</text>
+    </view>
+
+    <!-- 空状态 -->
+    <empty-state 
+      wx:if="{{!loading && likes.length === 0}}"
+      icon="❤️"
+      title="还没有收到点赞"
+      description="分享更多精彩内容来获得点赞吧"
+      action-text="去发布内容"
+      show-action="{{true}}"
+      bind:action="onGoToPost"
+    />
+
+    <!-- 加载中骨架屏 -->
+    <view wx:if="{{loading && likes.length === 0}}" class="message-list">
+      <view wx:for="{{[1,2,3]}}" wx:key="*this" class="skeleton-item">
+        <view style="display: flex; align-items: center;">
+          <view class="skeleton-avatar"></view>
+          <view style="flex: 1; margin-left: 24rpx;">
+            <view class="skeleton-line short"></view>
+            <view class="skeleton-line long"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 点赞列表 -->
+    <view wx:if="{{likes.length > 0}}" class="message-list">
+      <view 
+        wx:for="{{likes}}" 
+        wx:key="id" 
+        class="message-item fade-in"
+        data-item="{{item}}"
+        bindtap="onViewDetail"
+      >
+        <image class="user-avatar" src="{{item.avatar}}" mode="aspectFill" />
+        <view class="message-item-content">
+          <view class="user-info">
+            <text class="user-name">{{item.user}}</text>
+            <text class="message-action">赞了你的{{item.content}}</text>
+          </view>
+          <view class="message-time">{{item.time}}</view>
+        </view>
+        <view class="like-icon">❤️</view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view wx:if="{{loadingMore}}" class="loading-container">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 没有更多数据 -->
+    <view wx:if="{{noMore && likes.length > 0}}" class="no-more-container">
+      <text class="no-more-text">没有更多了</text>
+    </view>
+  </view>
+</view>

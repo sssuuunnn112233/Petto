@@ -1,0 +1,64 @@
+<!--群聊聊天页面-->
+<view class="chat-container">
+  <!-- 自定义头部 -->
+  <view class="custom-header">
+    <view class="back-button" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <view class="header-info" bindtap="onGroupSetting">
+      <view class="group-name">{{groupName}}</view>
+      <view class="member-count">({{members.length}}人)</view>
+    </view>
+    <view class="setting-button" bindtap="onGroupSetting">
+      <text class="setting-icon">⚙️</text>
+    </view>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view class="message-list" scroll-y="{{true}}" scroll-into-view="msg-{{messages.length-1}}">
+    <view wx:for="{{messages}}" wx:key="id" class="message-item message-{{item.type}}" id="msg-{{index}}">
+      <!-- 系统消息 -->
+      <view wx:if="{{item.type === 'system'}}" class="system-message">
+        <text>{{item.content}}</text>
+        <text class="system-time">{{item.time}}</text>
+      </view>
+      
+      <!-- 用户消息 -->
+      <view wx:else class="chat-message" data-id="{{item.id}}" bindlongpress="onLongPressMessage">
+        <view wx:if="{{item.type === 'other'}}" class="message-left">
+          <image class="user-avatar" src="{{item.user.avatar}}" mode="aspectFill" />
+          <view class="message-content-wrapper">
+            <view class="user-name">{{item.user.name}}</view>
+            <view class="message-content">{{item.content}}</view>
+            <view class="message-time">{{item.time}}</view>
+          </view>
+        </view>
+        
+        <view wx:else class="message-right">
+          <view class="message-content-wrapper">
+            <view class="message-content">{{item.content}}</view>
+            <view class="message-time">{{item.time}}</view>
+          </view>
+          <image class="user-avatar" src="{{item.user.avatar}}" mode="aspectFill" />
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <view class="input-tools">
+      <text class="tool-icon">😊</text>
+      <text class="tool-icon">📷</text>
+    </view>
+    <input 
+      class="message-input" 
+      placeholder="说点什么..." 
+      value="{{inputValue}}" 
+      bindinput="onInputChange"
+      confirm-type="send"
+      bindconfirm="sendMessage"
+    />
+    <button class="send-btn" bindtap="sendMessage" disabled="{{!inputValue}}">发送</button>
+  </view>
+</view>

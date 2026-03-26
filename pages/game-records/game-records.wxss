@@ -1,0 +1,302 @@
+/* pages/game-records/game-records.wxss */
+page {
+  background-color: #FFF8DC;
+  height: 100vh;
+}
+
+.container {
+  height: calc(100vh - 44px - env(safe-area-inset-top)); /* 减去导航栏高度和安全区域 */
+  padding: 16px;
+}
+
+
+
+/* 积分卡片 */
+.points-card {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.points-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.points-label {
+  font-size: 14px;
+  color: #8B4513;
+  margin-bottom: 4px;
+}
+
+.points-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #8B4513;
+}
+
+.store-btn {
+  background: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+/* 统计卡片 */
+.stats-section {
+  margin-bottom: 16px;
+}
+
+.stats-card {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.stats-item {
+  text-align: center;
+}
+
+.stats-number {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.stats-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 筛选区域 */
+.filter-section {
+  margin-bottom: 16px;
+}
+
+.filter-scroll {
+  white-space: nowrap;
+}
+
+.filter-list {
+  display: flex;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  min-width: 80px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.filter-item.active {
+  border-color: #8B4513;
+  background: #FFF8DC;
+}
+
+.filter-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+.filter-text {
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* 记录列表 */
+.records-section {
+  flex: 1;
+}
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.record-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.record-icon {
+  width: 48px;
+  height: 48px;
+  background: #FFF8DC;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.game-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.record-info {
+  flex: 1;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.game-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.record-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.record-details {
+  display: flex;
+  gap: 16px;
+}
+
+.record-score, .record-duration {
+  font-size: 14px;
+  color: #666;
+}
+
+.record-points {
+  text-align: center;
+  margin-left: 12px;
+}
+
+.points-earned {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FF6B35;
+  margin-bottom: 2px;
+}
+
+.record-points .points-label {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-text {
+  display: block;
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  display: block;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 24px;
+}
+
+.play-btn {
+  background: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+/* 加载状态 */
+.loading-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 没有更多 */
+.no-more-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.no-more-text {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .container {
+    padding: 12px;
+  }
+  
+  .points-card {
+    padding: 16px;
+  }
+  
+  .points-value {
+    font-size: 24px;
+  }
+  
+  .stats-card {
+    padding: 12px;
+  }
+  
+  .record-item {
+    padding: 12px;
+  }
+  
+  .record-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .game-icon {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -1,0 +1,20 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="follow-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5E6"/>
+      <stop offset="100%" stop-color="#FFE4B5"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#follow-bg)"/>
+  <!-- 用户头像 -->
+  <circle cx="28" cy="26" r="8" fill="#F5B07A"/>
+  <path
+    d="M28 36c-7 0-12 3.7-13.5 9.6C15.2 48 19.8 50 28 50s12.8-2 13.5-4.4C40 39.7 35 36 28 36z"
+    fill="#F2C9A0"
+  />
+  <!-- 加号 -->
+  <circle cx="42" cy="22" r="8" fill="#FFB6C1"/>
+  <path d="M42 18v8M38 22h8" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
+
+

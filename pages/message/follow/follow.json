@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "message-header": "/components/message-header/message-header",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}
+
+
+

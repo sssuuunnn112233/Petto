@@ -1,0 +1,113 @@
+<page-meta>
+  <navigation-bar title="翻牌消消乐" back="{{true}}" color="black" background="transparent" bind:back="onBackToMenu"></navigation-bar>
+</page-meta>
+
+<view class="flip-game-page">
+  <!-- 背景图片 -->
+  <image class="background-image" src="/assets/flipcards1/interface/bg1.jpg" mode="aspectFill"></image>
+  <!-- 游戏信息栏 -->
+  <view class="game-info">
+    <view class="info-item level-selector" bindtap="onShowLevelSelect">
+      <text class="info-label">关卡</text>
+      <view class="level-value-wrapper">
+        <text class="level-arrow level-arrow-left" catchtap="onPrevLevel">‹</text>
+        <text class="info-value level-value">{{level}}</text>
+        <text class="level-arrow level-arrow-right" catchtap="onNextLevelQuick">›</text>
+      </view>
+    </view>
+    <view class="info-item">
+      <text class="info-label">时间</text>
+      <text class="info-value">{{timeFormatted}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">步数</text>
+      <text class="info-value">{{moves}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">进度</text>
+      <text class="info-value">{{matchedPairs}}/{{totalPairs}}</text>
+    </view>
+  </view>
+
+  <!-- 游戏区域 -->
+  <view class="game-board" style="grid-template-columns: repeat({{gridCols}}, 1fr);">
+    <view 
+      class="card {{item.isFlipped ? 'flipped' : ''}} {{item.isMatched ? 'matched' : ''}}"
+      wx:for="{{cards}}" 
+      wx:key="id"
+      data-index="{{index}}"
+      bindtap="onCardTap">
+      <view class="card-inner">
+        <view class="card-front">
+          <image class="card-back-image" src="/assets/icon/柯基.png" mode="aspectFit"></image>
+        </view>
+        <view class="card-back">
+          <image class="card-image" src="{{item.image}}" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 控制按钮 -->
+  <view class="control-buttons">
+    <button class="control-btn" bindtap="onShowLevelSelect">选择关卡</button>
+    <button class="control-btn" bindtap="onRestart">重新开始</button>
+  </view>
+
+  <!-- 通关面板 -->
+  <view class="win-panel" wx:if="{{showWinPanel}}">
+    <view class="win-mask"></view>
+    <view class="win-content">
+      <view class="win-title">恭喜通关！</view>
+      <view class="win-stats">
+        <view class="win-stat">
+          <text class="stat-label">关卡</text>
+          <text class="stat-value">{{level}}</text>
+        </view>
+        <view class="win-stat">
+          <text class="stat-label">用时</text>
+          <text class="stat-value">{{winTime}}</text>
+        </view>
+        <view class="win-stat">
+          <text class="stat-label">步数</text>
+          <text class="stat-value">{{winMoves}}</text>
+        </view>
+      </view>
+      <view class="win-buttons">
+        <button class="win-btn secondary" bindtap="onBackToMenu">返回</button>
+        <button class="win-btn" bindtap="onNextLevel">
+          {{level >= 3 ? '再玩一次' : '下一关'}}
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关卡选择弹窗 -->
+  <view class="level-select-modal" wx:if="{{showLevelSelect}}">
+    <view class="modal-mask" bindtap="onCloseLevelSelect"></view>
+    <view class="modal-content">
+      <view class="modal-title">选择关卡</view>
+      <view class="level-buttons">
+        <button 
+          class="level-btn {{level === 1 ? 'active' : ''}}"
+          data-level="1"
+          bindtap="onSelectLevel">
+          关卡 1 (4×4)
+        </button>
+        <button 
+          class="level-btn {{level === 2 ? 'active' : ''}}"
+          data-level="2"
+          bindtap="onSelectLevel">
+          关卡 2 (4×6)
+        </button>
+        <button 
+          class="level-btn {{level === 3 ? 'active' : ''}}"
+          data-level="3"
+          bindtap="onSelectLevel">
+          关卡 3 (6×6)
+        </button>
+      </view>
+      <button class="close-btn" bindtap="onCloseLevelSelect">关闭</button>
+    </view>
+  </view>
+</view>

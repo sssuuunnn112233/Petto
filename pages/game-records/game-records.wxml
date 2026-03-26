@@ -1,0 +1,113 @@
+<!-- pages/game-records/game-records.wxml -->
+<page-meta>
+  <navigation-bar title="游戏记录" back="{{true}}" delta="2" color="black" background="#FFF8DC"></navigation-bar>
+</page-meta>
+
+<scroll-view 
+  class="container" 
+  scroll-y 
+  refresher-enabled="{{true}}"
+  bindrefresherrefresh="onRefresh"
+  bindscrolltolower="onScrollToLower"
+>
+
+  <!-- 积分卡片 -->
+  <view class="points-card">
+    <view class="points-info">
+      <text class="points-label">当前积分</text>
+      <text class="points-value">{{userPoints}}</text>
+    </view>
+    <button class="store-btn" bindtap="onGoToStore">积分商店</button>
+  </view>
+
+  <!-- 游戏统计 -->
+  <view class="stats-section">
+    <view class="stats-card">
+      <view class="stats-item">
+        <text class="stats-number">{{gameStats.totalGames}}</text>
+        <text class="stats-label">总游戏</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number">{{gameStats.totalScore}}</text>
+        <text class="stats-label">总得分</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number">{{gameStats.bestScore}}</text>
+        <text class="stats-label">最高分</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number">{{gameStats.totalPoints}}</text>
+        <text class="stats-label">总积分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游戏类型筛选 -->
+  <view class="filter-section">
+    <scroll-view class="filter-scroll" scroll-x>
+      <view class="filter-list">
+        <view 
+          class="filter-item {{selectedGame === item.value ? 'active' : ''}}"
+          wx:for="{{gameTypes}}" 
+          wx:key="value"
+          bindtap="onGameTypeChange"
+          data-type="{{item.value}}"
+        >
+          <image class="filter-icon" src="{{item.icon}}" mode="aspectFit"></image>
+          <text class="filter-text">{{item.label}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 游戏记录列表 -->
+  <view class="records-section">
+    <view class="records-list">
+      <view 
+        class="record-item" 
+        wx:for="{{gameRecords}}" 
+        wx:key="id" 
+        bindtap="onRecordTap" 
+        data-record="{{item}}"
+      >
+        <view class="record-icon">
+          <image class="game-icon" src="{{item.gameIcon}}" mode="aspectFit"></image>
+        </view>
+        
+        <view class="record-info">
+          <view class="record-header">
+            <text class="game-name">{{item.gameTypeText}}</text>
+            <text class="record-time">{{item.timeText}}</text>
+          </view>
+          <view class="record-details">
+            <text class="record-score">得分: {{item.score}}</text>
+            <text class="record-duration">用时: {{item.durationText}}</text>
+          </view>
+        </view>
+        
+        <view class="record-points">
+          <text class="points-earned">+{{item.pointsEarned}}</text>
+          <text class="points-label">积分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{gameRecords.length === 0 && !loading}}">
+      <image class="empty-icon" src="/images/empty-games.svg"></image>
+      <text class="empty-text">还没有游戏记录</text>
+      <text class="empty-desc">去玩游戏赚取积分吧</text>
+      <button class="play-btn" bindtap="onGoToGames">开始游戏</button>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-section" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 没有更多 -->
+    <view class="no-more-section" wx:if="{{!hasMore && gameRecords.length > 0}}">
+      <text class="no-more-text">没有更多记录了</text>
+    </view>
+  </view>
+</scroll-view>

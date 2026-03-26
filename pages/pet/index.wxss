@@ -1,0 +1,986 @@
+/* 重置全局样式影响 */
+page {
+  height: 100%;
+  background-color: #f5f5f5; /* 使用纯色背景，背景图由组件控制 */
+}
+.container {
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: transparent;
+  height: 100%;
+  min-height: 100%;
+  padding: 0 30rpx 120rpx 30rpx !important; /* 减少底部padding从240rpx到120rpx */
+  gap: 20rpx;
+  box-sizing: border-box;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  padding-top: calc(env(safe-area-inset-top) + 120rpx) !important;
+}
+
+/* 背景图层，铺满页面且在内容后面 */
+.bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* 顶部信息区：左侧宠物信息 + 右侧状态栏 */
+.top-info {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 190rpx);
+  left: 30rpx;
+  right: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 1;
+}
+
+.pet-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  padding: 16rpx 20rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.pet-name { font-weight: 600; font-size: 30rpx; }
+.pet-age { color: #666; font-size: 26rpx; }
+
+/* 顶部功能按钮 */
+.function-buttons {
+  display: flex;
+  gap: 145rpx !important;
+  align-self: flex-start;
+  margin: calc(env(safe-area-inset-top) + 30rpx) 0 5rpx 10rpx;
+}
+
+.function-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 20rpx;
+  padding: 12rpx 20rpx;
+  font-size: 24rpx;
+  line-height: 1;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.function-btn::after {
+  border: none;
+}
+
+.function-btn:active {
+  background: #f5f5f5;
+  transform: scale(0.95);
+}
+
+.btn-icon {
+  font-size: 28rpx;
+}
+
+.btn-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 状态栏 - 右侧竖排 */
+.status-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12rpx;
+  padding: 16rpx 20rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+  min-width: 200rpx;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  width: 100%;
+}
+
+.status-label {
+  font-size: 24rpx;
+  color: #333;
+  min-width: 80rpx;
+}
+
+.status-progress {
+  flex: 1;
+  height: 12rpx;
+  background: #E0E0E0;
+  border-radius: 6rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 6rpx;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.status-value {
+  font-size: 22rpx;
+  color: #666;
+  font-weight: 600;
+  min-width: 40rpx;
+  text-align: right;
+}
+
+/* 宠物区域 - 主要展示区域 */
+.pet-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  min-height: 480rpx;
+  margin: 30rpx 0;
+  position: relative;
+  background: transparent; /* 确保背景透明 */
+}
+
+.pet {
+  width: 600rpx;
+  height: 600rpx;
+  animation: idle 2s infinite alternate;
+}
+
+/* 默认宠物容器 */
+.default-pet-container {
+  position: relative;
+  width: 600rpx;
+  height: 600rpx;
+  animation: idle 2s infinite alternate;
+  background: transparent; /* 确保背景透明 */
+}
+
+/* 自定义宠物容器 */
+.custom-pet {
+  position: relative;
+  animation: idle 2s infinite alternate;
+  background: transparent; /* 确保背景透明 */
+}
+
+/* 宠物图层 */
+.pet-layer {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  object-fit: contain;
+  object-position: center center;
+}
+
+/* 所有锚点定位现在由 cat-renderer 组件统一管理 */
+
+/* 装扮配件图层 */
+.pet-outfit-layer {
+  position: absolute;
+  width: 140rpx;
+  height: 140rpx;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
+  /* 使用中心点定位，与衣橱页面保持一致 */
+  transform: translate(-50%, -50%);
+  /* 抵消父容器的idle动画缩放效果 */
+  animation: counter-idle 2s infinite alternate;
+  transform-origin: center center;
+}
+
+/* 反向动画，抵消宠物容器的缩放 */
+@keyframes counter-idle {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to { transform: translate(-50%, -50%) scale(0.952); } /* 1/1.05 ≈ 0.952 */
+}
+
+/* 宠物临时气泡，靠近宠物图片右上方 */
+.pet-bubble {
+  position: absolute;
+  top: 20rpx;
+  left: 62%;
+  transform: translateX(-10%);
+  max-width: 65%;
+}
+
+@keyframes idle {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* 操作按钮区域 */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+  margin: 20rpx 0 0 0;
+  padding: 20rpx 0;
+  position: relative;
+}
+
+.action-buttons button {
+  background: #442424;
+  color: white;
+  border: none;
+  border-radius: 25rpx;
+  padding: 15rpx 30rpx;
+  font-size: 28rpx;
+}
+
+.action-buttons button:active {
+  background: #5a0f05;
+}
+
+/* 聊天框 - 固定在底部 */
+.chat-box {
+  width: 100%;
+  background: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  box-shadow: 0 -4rpx 10rpx rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+}
+
+/* 悬浮语音按钮，位于对话框上方右侧 */
+.voice-button {
+  position: fixed;
+  right: 24rpx;
+  bottom: 140rpx; /* 位于输入框上方 */
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  box-shadow: 0 8rpx 16rpx rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  transition: all 0.3s ease;
+}
+
+.voice-button.recording {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  animation: recording-pulse 1.5s infinite;
+}
+
+.voice-button.playing {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  animation: playing-pulse 1s infinite;
+}
+
+@keyframes recording-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8rpx 16rpx rgba(255, 107, 107, 0.3);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12rpx 24rpx rgba(255, 107, 107, 0.5);
+  }
+}
+
+@keyframes playing-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8rpx 16rpx rgba(78, 205, 196, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 12rpx 24rpx rgba(78, 205, 196, 0.5);
+  }
+}
+
+.voice-icon {
+  width: 80rpx;
+  height: 80rpx;
+  fill: #fff;
+}
+
+.voice-status {
+  position: absolute;
+  bottom: -40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  white-space: nowrap;
+  animation: status-fade-in 0.3s ease-out;
+}
+
+.recording-indicator {
+  background: rgba(255, 107, 107, 0.95);
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 107, 0.3);
+}
+
+.playing-indicator {
+  background: rgba(78, 205, 196, 0.95);
+  box-shadow: 0 4rpx 12rpx rgba(78, 205, 196, 0.3);
+}
+
+@keyframes status-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 设置悬浮窗样式 */
+.modal-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal-panel {
+  width: 86vw;
+  max-width: 640rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 12rpx 24rpx rgba(0,0,0,0.18);
+  padding: 28rpx 24rpx;
+}
+
+.modal-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+
+.modal-field {
+  margin-bottom: 16rpx;
+}
+
+.label {
+  display: inline-block;
+  min-width: 100rpx;
+  color: #666;
+  font-size: 26rpx;
+}
+
+.field-input {
+  display: inline-block;
+  width: calc(100% - 110rpx);
+  border: 1rpx solid #ddd;
+  border-radius: 16rpx;
+  padding: 12rpx 18rpx;
+  font-size: 26rpx;
+  background: #fff;
+}
+
+.gender-group {
+  display: inline-flex;
+  gap: 16rpx;
+}
+
+.gender-item {
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid #ddd;
+  color: #444;
+  font-size: 26rpx;
+}
+
+.gender-item.active {
+  border-color: #411e03;
+  color: #44180d;
+  background: #eafff2;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
+
+.btn {
+  border: none;
+  border-radius: 16rpx;
+  padding: 12rpx 22rpx;
+  font-size: 26rpx;
+}
+
+.btn.cancel { background: #f5f5f5; color: #333; }
+.btn.confirm { background: #44221d; color: #fff; }
+
+/* 删除聊天记录区域后无此样式 */
+
+.chat-item {
+  display: inline-block;
+  max-width: 80%;
+  margin: 10rpx 0;
+  padding: 12rpx 16rpx;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.chat-item.user {
+  text-align: right;
+  color: #501008;
+  background: rgba(74, 144, 226, 0.1);
+  margin-left: 60rpx;
+}
+
+.chat-item.pet {
+  text-align: left;
+  color: #f39c12;
+  background: rgba(243, 156, 18, 0.1);
+  margin-right: 60rpx;
+}
+
+.input-area {
+  display: flex;
+  gap: 16rpx;
+  padding: 12rpx 20rpx ; /* 减少padding并优化安全区域处理 */
+  border-top: 1rpx solid #eee;
+  background: #fafafa;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* 用户临时气泡，显示在输入框上方居中偏左 */
+.user-bubble {
+  position: absolute;
+  bottom: calc(100% + 8rpx);
+  left: 20rpx;
+  right: 20rpx;
+  display: inline-block;
+  max-width: 90%;
+}
+
+/* 通用气泡样式 */
+.bubble {
+  background: #fff5f7;
+  color: #8a2a3b;
+  padding: 14rpx 18rpx;
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  border: 1rpx solid #f8cdda;
+  box-shadow: 0 6rpx 14rpx rgba(255, 105, 135, 0.12);
+  animation: bubble-pop 240ms ease-out;
+}
+
+/* 可爱小尾巴：宠物气泡朝左指向宠物 */
+.pet-bubble::after {
+  content: "";
+  position: absolute;
+  left: -10rpx;
+  top: 28rpx;
+  width: 0; height: 0;
+  border-top: 10rpx solid transparent;
+  border-bottom: 10rpx solid transparent;
+  border-right: 12rpx solid #fff5f7;
+}
+.pet-bubble::before {
+  content: "";
+  position: absolute;
+  left: -12rpx;
+  top: 28rpx;
+  width: 0; height: 0;
+  border-top: 10rpx solid transparent;
+  border-bottom: 10rpx solid transparent;
+  border-right: 12rpx solid #f8cdda; /* 外边描边 */
+}
+
+/* 用户气泡：在输入框上方，尾巴向下居中 */
+.user-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10rpx;
+  width: 0; height: 0;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-top: 12rpx solid #fff5f7;
+}
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -12rpx;
+  width: 0; height: 0;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-top: 12rpx solid #f8cdda; /* 外边描边 */
+}
+
+@keyframes bubble-pop {
+  0% { transform: scale(0.95); opacity: 0.0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.input-area input {
+  flex: 1 1 auto;
+  min-width: 0; /* 允许在小屏幕下正确压缩 */
+  border: 1rpx solid #ddd;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 12rpx 22rpx;
+  margin-right: 0;
+  font-size: 26rpx;
+}
+
+.input-area button {
+  background: #530f0a;
+  color: white;
+  border: none;
+  border-radius: 20rpx;
+  padding: 10rpx 16rpx;
+  font-size: 24rpx;
+  flex: 0 0 120rpx; /* 固定按钮宽度 */
+  text-align: center;
+}
+
+/* === 开发测试面板样式 === */
+
+.dev-test-panel {
+  position: fixed;
+  bottom: 150rpx !important;
+  right: 150rpx;
+  z-index: 500; /* 降低层级，确保在背景选择器之下 */
+}
+
+.test-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 30rpx;
+  color: white;
+  font-size: 24rpx;
+  gap: 8rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.3);
+}
+
+.test-icon {
+  font-size: 28rpx;
+}
+
+.test-text {
+  font-size: 22rpx;
+}
+
+.test-panel {
+  position: absolute;
+  bottom: 80rpx;
+  right: 0;
+  width: 320rpx;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10rpx);
+  transform-origin: bottom right;
+  animation: slideUpIn 0.3s ease-out;
+}
+
+@keyframes slideUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.test-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.test-section {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.test-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.test-btn {
+  flex: 1;
+  min-width: 140rpx;
+  height: 60rpx;
+  font-size: 20rpx;
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  color: white;
+  border: none;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rpx 8rpx rgba(139, 69, 19, 0.3);
+  transition: all 0.2s ease;
+}
+
+.test-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 1rpx 4rpx rgba(139, 69, 19, 0.3);
+}
+
+.test-info {
+  margin-top: 15rpx;
+  padding: 10rpx;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 8rpx;
+  border-left: 4rpx solid #ffc107;
+}
+
+.info-text {
+  font-size: 20rpx;
+  color: #856404;
+  line-height: 1.4;
+}
+
+/* 响应式调整 */
+@media (max-width: 400px) {
+  .test-panel {
+    width: 280rpx;
+    right: -20rpx;
+  }
+  
+  .test-btn {
+    min-width: 120rpx;
+    font-size: 18rpx;
+  }
+}
+
+/* 确保测试面板不被其他元素遮挡 */
+.dev-test-panel {
+  pointer-events: auto;
+}
+
+.test-panel {
+  pointer-events: auto;
+}
+
+/* 测试按钮悬停效果 */
+.test-toggle-btn:active {
+  transform: scale(0.95);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* 优化小屏幕显示 */
+@media (max-height: 800px) {
+  .dev-test-panel {
+    bottom: 150rpx;
+  }
+}
+/* 语音回应开关样式 */
+.voice-response-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+
+.toggle-text {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+}
+
+.toggle-switch {
+  width: 80rpx;
+  height: 40rpx;
+  background: #ddd;
+  border-radius: 20rpx;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.toggle-switch.active {
+  background: #07c160;
+}
+
+.toggle-slider {
+  width: 36rpx;
+  height: 36rpx;
+  background: white;
+  border-radius: 18rpx;
+  position: absolute;
+  top: 2rpx;
+  left: 2rpx;
+  transition: all 0.3s ease;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+  left: 42rpx;
+}
+
+/* 优化设置面板布局 */
+.modal-panel {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-field {
+  margin-bottom: 30rpx;
+}
+
+.modal-field:last-of-type {
+  margin-bottom: 40rpx;
+}
+/* 语音开关按钮样式 */
+.test-btn.voice-on {
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+}
+
+.test-btn.voice-off {
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+}
+
+.test-btn.voice-on:active {
+  box-shadow: 0 1rpx 4rpx rgba(139, 69, 19, 0.3);
+}
+
+.test-btn.voice-off:active {
+  box-shadow: 0 1rpx 4rpx rgba(139, 69, 19, 0.3);
+}
+/* === 背景选择器样式 === */
+
+/* 确保背景选择器在测试按钮之上 */
+.modal-mask {
+  z-index: 1000; /* 高于测试按钮的500 */
+}
+
+.background-selector-panel {
+  width: 90vw;
+  max-width: 700rpx;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 12rpx 24rpx rgba(0,0,0,0.18);
+  padding: 32rpx 24rpx;
+  overflow-y: auto;
+  margin-top: 110rpx;
+}
+
+.selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.selector-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+  text-align: center;
+}
+
+.close-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+  font-size: 32rpx;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:active {
+  background: #e0e0e0;
+  transform: scale(0.95);
+}
+
+.background-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.background-item {
+  position: relative;
+  border-radius: 16rpx;
+  overflow: hidden;
+  border: 3rpx solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.background-item.active {
+  border-color: #07c160;
+  box-shadow: 0 8rpx 16rpx rgba(7, 193, 96, 0.3);
+}
+
+.background-preview {
+  width: 100%;
+  height: 200rpx;
+  object-fit: cover;
+}
+
+.background-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+  padding: 20rpx 16rpx 12rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.selected-badge {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  width: 48rpx;
+  height: 48rpx;
+  background: #07c160;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 8rpx rgba(7, 193, 96, 0.4);
+}
+
+/* 背景选择器动画 */
+.background-selector-panel {
+  animation: selectorSlideIn 0.3s ease-out;
+}
+
+@keyframes selectorSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(50rpx);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 400px) {
+  .background-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .background-preview {
+    height: 160rpx;
+  }
+}
+
+/* 功能按钮布局调整 */
+.function-buttons {
+  display: flex;
+  gap: 16rpx;
+  align-self: flex-start;
+  margin: calc(env(safe-area-inset-top) + 30rpx) 0 5rpx 10rpx;
+  flex-wrap: wrap; /* 允许换行 */
+}
+
+/* 小屏幕下的按钮布局优化 */
+@media (max-width: 400px) {
+  .function-buttons {
+    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .function-btn {
+    min-width: 100rpx;
+  }
+}
+/* 存储清理按钮样式 */
+.test-btn.storage-clean {
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  color: white;
+  border: 1px solid #8B4513;
+}
+
+.test-btn.storage-clean:active {
+  background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+  transform: scale(0.95);
+}

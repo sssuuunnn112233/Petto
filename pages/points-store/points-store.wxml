@@ -1,0 +1,260 @@
+<!-- pages/points-store/points-store.wxml -->
+<page-meta>
+  <navigation-bar title="{{pageTitle}}" back="{{true}}" delta="2" color="black" background="#FFF8DC"></navigation-bar>
+</page-meta>
+
+<scroll-view class="container" scroll-y>
+  <!-- 积分显示 -->
+  <view class="points-header">
+    <view class="points-display">
+      <text class="points-icon">💰</text>
+      <view class="points-info">
+        <text class="points-label">我的积分</text>
+        <text class="points-value">{{userPoints}}</text>
+      </view>
+    </view>
+    <view wx:if="{{fromPage === 'pet'}}" class="quick-tip">
+      <text class="tip-text">{{selectedCategory === 'food' ? '💡 选择数量喂食' : '🎾 快乐玩耍'}}</text>
+    </view>
+  </view>
+
+  <!-- 分类选择 -->
+  <view class="category-section">
+    <view class="category-list">
+      <view 
+        class="category-item {{selectedCategory === item.value ? 'active' : ''}}"
+        wx:for="{{categories}}" 
+        wx:key="value"
+        bindtap="onCategoryChange"
+        data-category="{{item.value}}"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-text">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 库存区域 (仅在宠物页面显示) -->
+  <view wx:if="{{fromPage === 'pet' && inventoryItems.length > 0}}" class="inventory-section">
+    <view class="section-title">
+      <text class="title-text">📦 我的库存</text>
+    </view>
+    <view class="inventory-grid">
+      <view 
+        class="inventory-item" 
+        wx:for="{{inventoryItems}}" 
+        wx:key="id"
+        bindtap="onBuyItem"
+        data-item="{{item}}"
+      >
+        <view class="inventory-icon">{{item.icon}}</view>
+        <view class="inventory-info">
+          <text class="inventory-name">{{item.name}}</text>
+          <text class="inventory-count">x{{item.inventoryCount}}</text>
+        </view>
+        <view class="inventory-btn">使用</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="items-section">
+    <view wx:if="{{fromPage === 'pet'}}" class="section-title">
+      <text class="title-text">🛒 商店购买</text>
+    </view>
+    <view class="items-grid">
+      <view 
+        class="item-card" 
+        wx:for="{{storeItems[selectedCategory]}}" 
+        wx:key="id"
+        bindtap="onBuyItem"
+        data-item="{{item}}"
+      >
+        <!-- 库存数量显示 -->
+        <view wx:if="{{inventory[item.id] > 0}}" class="item-inventory-badge">
+          <text class="inventory-badge-text">{{inventory[item.id]}}</text>
+        </view>
+        
+        <!-- 商品头部：图标和名称 -->
+        <view class="item-header">
+          <view class="item-icon-container">
+            <image 
+              wx:if="{{item.id === 'toy_1'}}" 
+              class="item-image" 
+              src="{{item.image}}" 
+              mode="aspectFit"
+            />
+            <text wx:else class="item-icon">{{item.icon}}</text>
+          </view>
+          <view class="item-name-container">
+            <text class="item-name">{{item.name}}</text>
+          </view>
+        </view>
+        
+        <!-- 商品信息 -->
+        <view class="item-info">
+          <text class="item-description">{{item.description}}</text>
+          <text class="item-effect">{{item.effect}}</text>
+        </view>
+        
+        <!-- 价格和购买按钮 -->
+        <view class="item-footer">
+          <view class="item-price">
+            <text class="price-icon">💰</text>
+            <text class="price-value">{{item.price}}</text>
+          </view>
+          <view class="buy-btn {{userPoints < item.price && item.price > 0 ? 'disabled' : (fromPage === 'pet' && item.category === 'food' && petStatus && petStatus.hunger < item.hungerReduction ? 'disabled' : '')}}">
+            <text class="buy-text">
+              <!-- 免费商品 -->
+              <block wx:if="{{item.price === 0}}">
+                <block wx:if="{{fromPage === 'pet'}}">
+                  <block wx:if="{{item.category === 'food'}}">喂食</block>
+                  <block wx:elif="{{item.category === 'toys'}}">玩耍</block>
+                  <block wx:else>免费获取</block>
+                </block>
+                <block wx:else>免费获取</block>
+              </block>
+              <!-- 付费商品 -->
+              <block wx:else>
+                <block wx:if="{{userPoints < item.price}}">积分不足</block>
+                <block wx:elif="{{fromPage === 'pet' && item.category === 'food' && petStatus && petStatus.hunger < item.hungerReduction}}">饥饿值不足</block>
+                <block wx:elif="{{fromPage === 'pet'}}">
+                  <block wx:if="{{item.category === 'food'}}">喂食</block>
+                  <block wx:elif="{{item.category === 'toys'}}">玩耍</block>
+                  <block wx:else>购买</block>
+                </block>
+                <block wx:else>购买</block>
+              </block>
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 积分获取提示 -->
+  <view class="tips-section">
+    <view class="tips-card">
+      <text class="tips-title">💡 如何获得积分？</text>
+      <view class="tips-list">
+        <text class="tips-item">• 玩2048游戏：每100分 = 1积分</text>
+        <text class="tips-item">• 玩翻牌游戏：每50分 = 1积分</text>
+        <text class="tips-item">• 每日签到：获得10积分</text>
+        <text class="tips-item">• 分享动态：获得5积分</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 库存使用弹窗 -->
+<view wx:if="{{showInventoryModal}}" class="quantity-modal-overlay" bindtap="hideInventoryModal">
+  <view class="quantity-modal" catchtap="">
+    <view class="modal-header">
+      <text class="modal-title">使用库存物品</text>
+      <view class="modal-close" bindtap="hideInventoryModal">✕</view>
+    </view>
+    
+    <view class="modal-content">
+      <!-- 商品信息 -->
+      <view class="selected-item-info">
+        <view class="item-icon-small">{{selectedItem.icon}}</view>
+        <view class="item-details">
+          <text class="item-name-small">{{selectedItem.name}}</text>
+          <text class="item-effect-small">{{selectedItem.effect}}</text>
+        </view>
+      </view>
+      
+      <!-- 当前状态 -->
+      <view class="current-status">
+        <text class="status-label">当前状态</text>
+        <view class="status-values">
+          <text class="status-value">饥饿值: {{petStatus.hunger}}/100</text>
+          <text class="status-value">库存: {{inventory[selectedItem.id]}}个</text>
+        </view>
+      </view>
+      
+      <!-- 数量选择 -->
+      <view class="quantity-selector">
+        <text class="quantity-label">使用数量</text>
+        <view class="quantity-controls">
+          <view class="quantity-btn {{selectedQuantity <= 1 ? 'disabled' : ''}}" catchtap="decreaseQuantity">-</view>
+          <text class="quantity-display">{{selectedQuantity}}</text>
+          <view class="quantity-btn {{selectedQuantity >= maxQuantity ? 'disabled' : ''}}" catchtap="increaseQuantity">+</view>
+        </view>
+        <text class="quantity-range">可用范围: 1-{{maxQuantity}}</text>
+      </view>
+      
+      <!-- 预览效果 -->
+      <view class="effect-preview">
+        <text class="preview-label">使用效果预览</text>
+        <view class="preview-values">
+          <text class="preview-item">使用数量: {{selectedQuantity}}个</text>
+          <text class="preview-item">费用: 免费（库存）</text>
+          <text class="preview-item">饥饿值: {{petStatus.hunger}} → {{previewHunger}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <view class="modal-btn cancel-btn" catchtap="hideInventoryModal">取消</view>
+      <view class="modal-btn confirm-btn" catchtap="confirmInventoryUse">确认使用</view>
+    </view>
+  </view>
+</view>
+
+<!-- 数量选择弹窗 -->
+<view wx:if="{{showQuantityModal}}" class="quantity-modal-overlay" bindtap="hideQuantityModal">
+  <view class="quantity-modal" catchtap="">
+    <view class="modal-header">
+      <text class="modal-title">{{fromPage === 'pet' ? '选择喂食数量' : '选择购买数量'}}</text>
+      <view class="modal-close" bindtap="hideQuantityModal">✕</view>
+    </view>
+    
+    <view class="modal-content">
+      <!-- 商品信息 -->
+      <view class="selected-item-info">
+        <view class="item-icon-small">{{selectedItem.icon}}</view>
+        <view class="item-details">
+          <text class="item-name-small">{{selectedItem.name}}</text>
+          <text class="item-effect-small">{{selectedItem.effect}}</text>
+        </view>
+      </view>
+      
+      <!-- 当前状态 -->
+      <view class="current-status">
+        <text class="status-label">当前状态</text>
+        <view class="status-values">
+          <text wx:if="{{fromPage === 'pet'}}" class="status-value">饥饿值: {{petStatus.hunger}}/100</text>
+          <text class="status-value">积分: {{userPoints}}</text>
+        </view>
+      </view>
+      
+      <!-- 数量选择 -->
+      <view class="quantity-selector">
+        <text class="quantity-label">选择数量</text>
+        <view class="quantity-controls">
+          <view class="quantity-btn {{selectedQuantity <= 1 ? 'disabled' : ''}}" catchtap="decreaseQuantity">-</view>
+          <text class="quantity-display">{{selectedQuantity}}</text>
+          <view class="quantity-btn {{selectedQuantity >= maxQuantity ? 'disabled' : ''}}" catchtap="increaseQuantity">+</view>
+        </view>
+        <text class="quantity-range">可选范围: 1-{{maxQuantity}}</text>
+      </view>
+      
+      <!-- 预览效果 -->
+      <view class="effect-preview">
+        <text class="preview-label">{{fromPage === 'pet' ? '喂食效果预览' : '购买预览'}}</text>
+        <view class="preview-values">
+          <text class="preview-item">数量: {{selectedQuantity}}个</text>
+          <text class="preview-item">费用: {{selectedItem.price === 0 ? '免费' : (selectedItem.price * selectedQuantity) + '积分'}}</text>
+          <text wx:if="{{fromPage === 'pet'}}" class="preview-item">饥饿值: {{petStatus.hunger}} → {{previewHunger}}</text>
+          <text wx:else class="preview-item">剩余积分: {{userPoints - (selectedItem.price * selectedQuantity)}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <view class="modal-btn cancel-btn" catchtap="hideQuantityModal">取消</view>
+      <view class="modal-btn confirm-btn" catchtap="confirmQuantitySelection">{{fromPage === 'pet' ? '确认喂食' : '确认购买'}}</view>
+    </view>
+  </view>
+</view>

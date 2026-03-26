@@ -1,0 +1,10 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="16" y="12" width="32" height="40" rx="2" fill="#C0C0C0"/>
+  <rect x="18" y="14" width="28" height="36" rx="1" fill="#FF6B35"/>
+  <rect x="20" y="16" width="24" height="8" fill="#FF4500"/>
+  <text x="32" y="22" text-anchor="middle" fill="white" font-size="6" font-weight="bold">BEEF</text>
+  <circle cx="32" cy="32" r="8" fill="#8B0000"/>
+  <circle cx="32" cy="32" r="6" fill="#A0522D"/>
+  <circle cx="28" cy="30" r="2" fill="#654321"/>
+  <circle cx="36" cy="34" r="2" fill="#654321"/>
+</svg>

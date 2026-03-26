@@ -1,0 +1,75 @@
+<page-meta>
+  <navigation-bar title="萌宠·2048" back="{{true}}" color="black" bind:back="onBackToGameCenter"></navigation-bar>
+</page-meta>
+
+<view class="page-wrapper">
+  <!-- 背景图片 -->
+  <image class="background-image" src="/assets/flipcards1/interface/bg2.jpg" mode="aspectFill"></image>
+  <scroll-view class="scrollarea" scroll-y>
+  <view class="game-container">
+    <!-- 游戏标题区域 -->
+    <view class="game-header">
+      <view class="title-section">
+        <text class="game-title">萌宠2048</text>
+        <view class="title-decoration">
+          <text class="cat-icon">🐱</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 游戏信息栏 -->
+    <view class="game-info-bar">
+      <view class="score-section">
+        <text class="score-label">分数</text>
+        <text class="score-value">{{score}}</text>
+      </view>
+      <view class="best-score-section">
+        <text class="best-score-label">最高分</text>
+        <text class="best-score-value">{{bestScore}}</text>
+      </view>
+    </view>
+
+    <!-- 游戏区域 -->
+    <view class="game-board {{slidingDirection ? 'sliding-' + slidingDirection : ''}}" 
+          catchtouchstart="onTouchStart" 
+          catchtouchmove="onTouchMove" 
+          catchtouchend="onTouchEnd">
+      <view class="board-container">
+        <view class="grid-row" wx:for="{{gameBoard}}" wx:key="rowIndex" wx:for-index="rowIndex">
+          <view class="grid-cell" 
+                wx:for="{{item}}" 
+                wx:for-item="value" 
+                wx:for-index="colIndex"
+                wx:key="colIndex">
+            <view class="cell-content {{value.isNew ? 'new-tile' : ''}} {{value.isMerged ? 'merged-tile' : ''}}" wx:if="{{value.value > 0}}">
+              <image class="cell-image" src="{{value.image}}" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作提示 -->
+    <view class="hint-text" style="position: relative; left: -1rpx; top: -18rpx">滑动屏幕移动方块，相同数字会合并</view>
+
+    <!-- 控制按钮 -->
+    <view class="control-buttons">
+      <button class="control-btn restart-btn" bindtap="onRestart" style="position: relative; left: -9rpx; top: -46rpx">重新开始</button>
+      <button class="control-btn back-btn" bindtap="onBackToGameCenter" style="position: relative; left: 9rpx; top: -42rpx">返回</button>
+    </view>
+
+    <!-- 游戏状态弹窗 -->
+    <view class="game-modal {{showModal ? 'show' : ''}}" wx:if="{{showModal}}">
+      <view class="modal-content">
+        <view class="modal-title">{{modalTitle}}</view>
+        <view class="modal-message">{{modalMessage}}</view>
+        <view class="modal-buttons">
+          <button class="modal-btn" bindtap="onRestart">重新开始</button>
+          <button class="modal-btn" bindtap="onContinue" wx:if="{{gameWon && !gameOver}}">继续游戏</button>
+          <button class="modal-btn secondary" bindtap="onBackToGameCenter">返回游戏</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  </scroll-view>
+</view>

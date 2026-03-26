@@ -1,0 +1,161 @@
+<!--message/index.wxml-->
+<view class="page">
+  <!-- 顶部导航栏 -->
+  <view class="header" style="height: 170rpx; display: flex; box-sizing: border-box; left: 0rpx; top: 0rpx">
+    <view class="header-title">消息</view>
+    <view class="header-right">
+      <view class="add-btn" bindtap="onAdd">
+        <text class="icon">➕</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view
+    class="message-scroll"
+    scroll-y="{{true}}"
+    enable-back-to-top="{{true}}"
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onRefresh"
+    bindscrolltolower="onLoadMore"
+    lower-threshold="100"
+  >
+    <!-- 三个快捷入口 -->
+    <view class="quick-access">
+      <view class="access-item" bindtap="onAccessLike">
+        <view class="access-icon">
+          <image class="access-img" src="/assets/icon/message-like.svg" mode="aspectFill" />
+        </view>
+        <view class="access-text">赞和收藏</view>
+      </view>
+      <view class="access-item" bindtap="onAccessFollow">
+        <view class="access-icon">
+          <image class="access-img" src="/assets/icon/message-follow.svg" mode="aspectFill" />
+        </view>
+        <view class="access-text">新增关注</view>
+      </view>
+      <view class="access-item" bindtap="onAccessComment">
+        <view class="access-icon">
+          <image class="access-img" src="/assets/icon/message-comment.svg" mode="aspectFill" />
+        </view>
+        <view class="access-text">评论和@</view>
+      </view>
+    </view>
+
+    <!-- 系统消息 -->
+    <view class="system-message-section" wx:if="{{systemMessages.length > 0}}">
+      <view class="system-header">
+        <text class="system-title">系统消息</text>
+      </view>
+      <view class="system-list">
+        <view 
+          wx:for="{{systemMessages}}" 
+          wx:key="id"
+          class="system-item {{item.unread ? 'unread' : ''}}"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+          bindtap="onOpenSystemMessage"
+        >
+          <view class="system-icon">{{item.icon}}</view>
+          <view class="system-content">
+            <view class="system-title-text">{{item.title}}</view>
+            <view class="system-desc">{{item.desc}}</view>
+            <view class="system-action">{{item.action}}</view>
+          </view>
+          <view class="system-right">
+            <view class="system-time">{{item.time}}</view>
+            <view class="system-dot" wx:if="{{item.unread}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 社交通知 -->
+    <view class="system-message-section" wx:if="{{socialNotifications.length > 0}}">
+      <view class="system-header">
+        <text class="system-title">社交通知</text>
+      </view>
+      <view class="system-list">
+        <view 
+          wx:for="{{socialNotifications}}" 
+          wx:key="id"
+          class="system-item {{item.unread ? 'unread' : ''}}"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+          bindtap="onOpenSystemMessage"
+        >
+          <view class="system-icon">{{item.icon}}</view>
+          <view class="system-content">
+            <view class="system-title-text">{{item.title}}</view>
+            <view class="system-desc">{{item.desc}}</view>
+            <view class="system-action">{{item.action}}</view>
+          </view>
+          <view class="system-right">
+            <view class="system-time">{{item.time}}</view>
+            <view class="system-dot" wx:if="{{item.unread}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 群消息 -->
+    <view class="system-message-section" wx:if="{{groupMessages.length > 0}}">
+      <view class="system-header">
+        <text class="system-title">群消息</text>
+      </view>
+      <view class="system-list">
+        <view 
+          wx:for="{{groupMessages}}" 
+          wx:key="id"
+          class="system-item {{item.unread ? 'unread' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onOpenGroupMessage"
+        >
+          <view class="system-icon">{{item.icon}}</view>
+          <view class="system-content">
+            <view class="system-title-text">{{item.title}}</view>
+            <view class="system-desc">{{item.desc}}</view>
+            <view class="system-action">{{item.action}}</view>
+          </view>
+          <view class="system-right">
+            <view class="system-time">{{item.time}}</view>
+            <view class="system-dot" wx:if="{{item.unread}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐关注 -->
+    <view class="recommend-section" wx:if="{{recommendations.length > 0}}">
+      <view class="recommend-header">
+        <text class="recommend-title">你可能感兴趣的人</text>
+        <text class="recommend-close" bindtap="onCloseRecommend">✕</text>
+      </view>
+      <view class="recommend-list">
+        <view 
+          wx:for="{{recommendations}}" 
+          wx:key="id"
+          wx:for-item="rec"
+          class="recommend-item"
+        >
+          <image class="recommend-avatar" src="{{rec.avatar}}" mode="aspectFill" />
+          <view class="recommend-info">
+            <view class="recommend-name">{{rec.name}}</view>
+            <view class="recommend-desc">{{rec.desc}}</view>
+          </view>
+          <view class="recommend-btn" data-id="{{rec.id}}" bindtap="onFollow">
+            <text class="btn-text">关注</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="load-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+</view>

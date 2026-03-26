@@ -1,0 +1,9 @@
+<!-- 消息页面通用头部组件 -->
+<view class="message-header" style="background: {{backgroundColor}}">
+  <view class="back-button" wx:if="{{showBack}}" bindtap="onBack">
+    <text class="back-icon">←</text>
+    <text class="back-text">返回</text>
+  </view>
+  <view class="header-title">{{title}}</view>
+  <view class="header-placeholder" wx:if="{{showBack}}"></view>
+</view>

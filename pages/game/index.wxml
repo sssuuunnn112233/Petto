@@ -1,0 +1,50 @@
+<page-meta>
+  <navigation-bar title="精选小游戏" back="{{false}}" color="black" background="#FFFFFF"></navigation-bar>
+</page-meta>
+
+<view class="page-wrapper">
+  <image class="page-bg-image" src="/assets/game_back.jpg" mode="aspectFill"></image>
+  <view class="scrollarea">
+    <view class="game-container">
+    <!-- 游戏列表 -->
+    <view class="games-list" >
+      <!-- 萌宠2048 -->
+      <view class="game-card match3-card" bindtap="onPlayMatch3">
+        <view class="game-bg">
+          <image class="pet-bg-image" src="/assets/game_loading.gif" mode="aspectFill"></image>
+          <view class="game-character">
+            
+          </view>
+        </view>
+        <view class="game-info" style="height: 220rpx; display: block; box-sizing: border-box">
+          <view class="game-name">萌宠·2048</view>
+          <view class="game-desc" style="position: relative; left: 206rpx; top: -59rpx">滑动合并数字，挑战2048</view>
+          <view class="play-btn" style="position: relative; left: -1rpx; top: -66rpx">START</view>
+        </view>
+      </view>
+
+      <!-- 翻牌消消乐游戏 -->
+      <view class="game-card fishing-card" bindtap="onPlayFishing">
+        <view class="game-bg">
+          <image class="pet-bg-image" src="/assets/pet.gif" mode="aspectFill"></image>
+          <view class="game-character">
+            
+            
+          </view>
+        </view>
+        <view class="game-info" style="height: 224rpx; display: block; box-sizing: border-box">
+          <view class="game-name">翻牌消消乐</view>
+          <view class="game-desc" style="position: relative; left: 252rpx; top: -59rpx">记忆翻牌配对挑战</view>
+          <view class="play-btn" style="position: relative; left: -1rpx; top: -66rpx">START</view>
+        </view>
+      </view>
+    </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+

@@ -1,0 +1,147 @@
+<!-- pages/feedback/feedback.wxml -->
+<page-meta>
+  <navigation-bar title="问题反馈" back="{{true}}" delta="2" color="black" background="#FFF8DC"></navigation-bar>
+</page-meta>
+
+<scroll-view class="container" scroll-y>
+  <!-- 返回按钮 -->
+  <view class="back-button-section">
+    <view class="back-button" bindtap="onBack">
+      <text class="back-icon">‹</text>
+      <text class="back-text">返回</text>
+    </view>
+  </view>
+
+  <!-- 云端状态指示器 -->
+  <view class="cloud-status-bar">
+    <view class="cloud-status {{useCloudData && !cloudError ? 'online' : 'offline'}}">
+      <view class="status-dot"></view>
+      <text class="status-text">{{useCloudData && !cloudError ? '云端同步' : '本地存储'}}</text>
+    </view>
+  </view>
+
+  <!-- 反馈类型选择 -->
+  <view class="section">
+    <view class="section-title">反馈类型</view>
+    <view class="type-list">
+      <view 
+        class="type-item {{feedbackType === item.value ? 'active' : ''}}"
+        wx:for="{{feedbackTypes}}" 
+        wx:key="value"
+        bindtap="onTypeSelect"
+        data-type="{{item.value}}"
+      >
+        <view class="type-header">
+          <text class="type-label">{{item.label}}</text>
+          <view class="type-radio">
+            <view class="radio-dot" wx:if="{{feedbackType === item.value}}"></view>
+          </view>
+        </view>
+        <text class="type-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 问题标题 -->
+  <view class="section">
+    <view class="section-title">问题标题 <text class="required">*</text></view>
+    <input 
+      class="input-field"
+      placeholder="简要描述您遇到的问题"
+      value="{{title}}"
+      bindinput="onTitleInput"
+      maxlength="50"
+    />
+    <view class="char-count">{{title.length}}/50</view>
+  </view>
+
+  <!-- 问题描述 -->
+  <view class="section">
+    <view class="section-title">详细描述 <text class="required">*</text></view>
+    <textarea 
+      class="textarea-field"
+      placeholder="请详细描述问题的具体情况、出现步骤、期望结果等，这将帮助我们更好地解决问题"
+      value="{{content}}"
+      bindinput="onContentInput"
+      maxlength="500"
+      auto-height
+    ></textarea>
+    <view class="char-count">{{content.length}}/500</view>
+  </view>
+
+  <!-- 截图上传 -->
+  <view class="section">
+    <view class="section-title">
+      <text>相关截图</text>
+      <text class="optional">(可选，最多{{maxImages}}张)</text>
+    </view>
+    <view class="image-upload">
+      <!-- 已选择的图片 -->
+      <view class="image-item" wx:for="{{images}}" wx:key="index">
+        <image 
+          class="upload-image" 
+          src="{{item.path}}" 
+          mode="aspectFill"
+          bindtap="onPreviewImage"
+          data-index="{{index}}"
+        ></image>
+        <view 
+          class="delete-btn"
+          bindtap="onDeleteImage"
+          data-index="{{index}}"
+        >×</view>
+      </view>
+      
+      <!-- 添加图片按钮 -->
+      <view 
+        class="add-image-btn" 
+        wx:if="{{images.length < maxImages}}"
+        bindtap="onChooseImage"
+      >
+        <text class="add-icon">📷</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="section">
+    <view class="section-title">
+      <text>联系方式</text>
+      <text class="optional">(可选，便于我们联系您)</text>
+    </view>
+    <input 
+      class="input-field"
+      placeholder="微信号、QQ号或其他联系方式"
+      value="{{contact}}"
+      bindinput="onContactInput"
+      maxlength="50"
+    />
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <button 
+      class="submit-btn {{submitting ? 'submitting' : ''}}"
+      bindtap="onSubmit"
+      disabled="{{submitting}}"
+    >
+      {{submitting ? '提交中...' : '提交反馈'}}
+    </button>
+    
+    <view class="history-link" bindtap="onViewHistory">
+      <text>查看反馈历史</text>
+    </view>
+  </view>
+
+  <!-- 温馨提示 -->
+  <view class="tips-section">
+    <view class="tips-title">💡 温馨提示</view>
+    <view class="tips-content">
+      <text>• 详细的问题描述有助于我们快速定位和解决问题</text>
+      <text>• 相关截图能更直观地展示问题现象</text>
+      <text>• 我们会在1-3个工作日内回复您的反馈</text>
+      <text>• 您的反馈对我们改进产品非常重要，感谢支持！</text>
+    </view>
+  </view>
+</scroll-view>
