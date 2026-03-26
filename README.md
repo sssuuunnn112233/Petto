@@ -9,7 +9,7 @@
 
 ## ✨ 核心功能
 
-### � 我的 Pettoo（核心模块）
+### 🐈 我的 Pettoo（核心模块）
 - **智能对话**：集成通义千问AI，支持文字和语音对话，智能回复
 - **语音交互**：集成百度语音识别和合成，真实语音通话体验
 - **宠物互动**：点击宠物、喂食、陪玩，实时更新心情值和饥饿值
@@ -105,83 +105,6 @@
 - **触摸事件**：处理用户交互
 - **动画系统**：游戏动效和过渡
 - **积分同步**：游戏积分实时同步
-
----
-
-## 📁 项目结构
-
-```
-Petto/
-├── pages/                      # 页面目录（18个主要页面）
-│   ├── pet/                   # 宠物主页（核心）
-│   ├── customize/             # 宠物捏脸
-│   ├── wardrobe/              # 宠物衣橱
-│   ├── game/                  # 游戏中心
-│   ├── flipcardgame/          # 翻牌记忆游戏
-│   ├── match3-game/           # 三消游戏（2048）
-│   ├── points-store/          # 积分商城
-│   ├── community/             # 论坛社区
-│   ├── create-post/           # 发布动态
-│   ├── post-detail/           # 动态详情
-│   ├── my-posts/              # 我的动态
-│   ├── message/               # 消息系统
-│   │   ├── like/             # 点赞消息
-│   │   ├── follow/           # 关注消息
-│   │   ├── comment/          # 评论消息
-│   │   ├── chat/             # 私聊
-│   │   ├── group-chat/       # 群聊
-│   │   └── group-setting/    # 群设置
-│   ├── profile/               # 个人主页
-│   ├── edit-profile/          # 编辑资料
-│   ├── feedback/              # 意见反馈
-│   ├── game-records/          # 游戏记录
-│   ├── login/                 # 登录页面
-│   └── loading/               # 统一加载页面
-├── components/                 # 组件目录（4个主要组件）
-│   ├── navigation-bar/        # 自定义导航栏
-│   ├── message-header/        # 消息页面头部
-│   ├── empty-state/           # 空状态组件
-│   └── cat-renderer/          # 猫咪渲染器（核心）
-├── cloudfunctions/             # 云函数目录（5个主要模块）
-│   ├── login/                 # 用户登录认证
-│   ├── pet/                   # 宠物管理
-│   ├── community/             # 社区功能
-│   ├── chat/                  # 聊天功能
-│   └── game/                  # 游戏数据
-├── cloudbase/                  # 云开发配置
-├── utils/                      # 工具函数库
-│   ├── aiService.js          # AI 和语音服务（核心）
-│   ├── qwenConfig.js         # 通义千问配置
-│   ├── baiduConfig.js        # 百度语音配置
-│   ├── catTemplate.js        # 猫咪模板系统
-│   ├── imagePool.js          # 图片池管理
-│   ├── pointsSync.js         # 积分同步
-│   ├── systemMessage.js      # 系统消息
-│   ├── cloudApi.js           # 云API封装
-│   ├── loadingNavigator.js   # 导航工具
-│   ├── mockVoiceService.js   # 模拟语音服务
-│   └── compatibleBaiduASR.js # 百度ASR兼容层
-├── assets/                     # 静态资源
-│   ├── pet_idle.png          # 宠物图片
-│   ├── wardrobe/             # 服装资源
-│   ├── customize/            # 捏脸资源
-│   ├── loading/              # 加载动画资源
-│   ├── tabbar/               # 底部导航图标
-│   ├── pet-backgrounds/      # 宠物背景图片（6张）
-│   ├── flipcards1/           # 翻牌游戏图片（3个关卡）
-│   └── icon/                 # 通用图标
-├── images/                     # 图片资源
-│   ├── pokemon/              # 社区图片（1-5.png）
-│   ├── empty-games.svg       # 空状态图标
-│   └── empty-posts.svg       # 空状态图标
-├── styles/                     # 公共样式
-│   └── message-common.wxss   # 消息页面通用样式
-├── app.js                      # 小程序入口
-├── app.json                    # 全局配置
-├── app.wxss                    # 全局样式
-├── project.config.json         # 项目配置
-└── README.md                   # 项目说明
-```
 
 ---
 
@@ -463,7 +386,7 @@ recommendations       # 推荐用户
 
 ## 📈 项目优化记录
 
-### 最近更新（2024年12月）
+### 最近更新（2025年12月）
 - ✅ **资源清理**：删除了1000+个未使用的图片文件，显著减少项目体积
 - ✅ **代码优化**：移除了重复的loading页面，统一为一个支持随机背景的页面
 - ✅ **界面优化**：修复了消息页面和积分商店的滚动问题
@@ -533,8 +456,8 @@ recommendations       # 推荐用户
 
 ## 📞 联系方式
 
-- **项目地址**：[GitHub](https://github.com/yourusername/petto-miniapp)
-- **问题反馈**：[Issues](https://github.com/yourusername/petto-miniapp/issues)
+- **项目地址**：[GitHub](https://github.com/sssuuummm112233/Petto)
+- **问题反馈**：[Issues](https://github.com/sssuuummm112233/Petto)
 - **技术文档**：[docs/](./docs/)
 
 ---
