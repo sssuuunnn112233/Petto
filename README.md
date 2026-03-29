@@ -70,7 +70,44 @@
 - **意见反馈**：用户反馈和建议收集
 
 ---
+## 🛠️ 页面预览
 
+### 🐈宠物模块页面
+   <img width="315" height="678" alt="image" src="https://github.com/user-attachments/assets/cd48468d-6e43-4eb7-ba89-d204b0a9ff54" />
+   <img width="318" height="678" alt="image" src="https://github.com/user-attachments/assets/e8a2a768-99b0-4f5e-bf69-568c97a43df1" />
+    <img width="315" height="677" alt="image" src="https://github.com/user-attachments/assets/b3ffd14c-04df-4861-b963-5d90ce218411" />
+    
+### 🎮小游戏模块页面
+<img width="322" height="692" alt="image" src="https://github.com/user-attachments/assets/9209805d-95bf-4adf-ad49-deb517d87294" />
+<img width="323" height="690" alt="image" src="https://github.com/user-attachments/assets/fbe65f11-da15-4c46-a051-402ddc736def" />
+<img width="324" height="692" alt="image" src="https://github.com/user-attachments/assets/3738bb8d-938a-44c5-bfc3-2a155409eb30" />
+
+### 💬 社区模块页面
+<img width="323" height="697" alt="image" src="https://github.com/user-attachments/assets/9ea1d5dd-b16c-4a36-96de-396c8fcb0998" />
+<img width="326" height="698" alt="image" src="https://github.com/user-attachments/assets/c451290b-97d3-4ced-b722-79f25970af19" />
+<img width="329" height="697" alt="image" src="https://github.com/user-attachments/assets/5210fe49-c9ef-49c3-8c98-ebd0b3b016fe" />
+
+### 📨消息模块页面
+<img width="323" height="694" alt="image" src="https://github.com/user-attachments/assets/cc4be445-5ee8-4b77-b5b4-5b30433fb5f6" />
+<img width="330" height="693" alt="image" src="https://github.com/user-attachments/assets/c6cb915b-4dc7-4c60-a88f-32085754bdcf" />
+<img width="328" height="693" alt="image" src="https://github.com/user-attachments/assets/c975dcca-bd6f-4083-94f2-01df891e2a42" />
+
+### 👤用户模块页面
+<img width="330" height="689" alt="image" src="https://github.com/user-attachments/assets/d969cd2f-1622-40d6-b0de-c7143fa5dc40" />
+<img width="324" height="689" alt="image" src="https://github.com/user-attachments/assets/e3a8fc5c-f7da-4817-913c-f9c0e655eed8" />
+<img width="322" height="688" alt="image" src="https://github.com/user-attachments/assets/f817a1ea-ef8b-4e08-9c05-d24e864f95ec" />
+
+### 🛒积分模块页面
+<img width="323" height="687" alt="image" src="https://github.com/user-attachments/assets/fdb3c096-590f-48ee-823e-b270a6389225" />
+<img width="327" height="693" alt="image" src="https://github.com/user-attachments/assets/8ed9cf6a-c3fc-4d72-9703-39610f498a30" />
+<img width="327" height="693" alt="image" src="https://github.com/user-attachments/assets/43fef923-ed9a-4d0b-a290-eacedd788bb0" />
+
+### ✨其他模块页面
+<img width="330" height="684" alt="image" src="https://github.com/user-attachments/assets/8ab07375-f0b1-4f4e-943b-ce320a39980a" />
+<img width="327" height="686" alt="image" src="https://github.com/user-attachments/assets/943d3021-7dea-456e-a5e7-866de2848b12" />
+<img width="329" height="681" alt="image" src="https://github.com/user-attachments/assets/4d8f5180-b1b0-4de1-91a6-bdcdcb9e35a8" />
+
+---
 ## 🛠️ 技术架构
 
 ### 前端技术
